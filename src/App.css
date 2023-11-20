@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre les éléments horizontalement dans un flex container */
+  justify-content: center; /* Centre les éléments verticalement */
+  background-image: url('./Show.png'); /* Chemin vers l'image de fond */
+  min-height: 100vh; /* Hauteur minimale pour prendre toute la hauteur de la vue */
+  margin: 0;
+}
+
+.count-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.TestLights {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0px;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+}
+
+
+

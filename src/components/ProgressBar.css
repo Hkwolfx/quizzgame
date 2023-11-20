@@ -1,0 +1,13 @@
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden; /* Assure que la barre interne reste dans les coins arrondis */
+  }
+  
+  .progress-bar {
+    height: 20px;
+    background-color: #4caf50; /* Couleur de remplissage de la jauge */
+    transition: width 1s ease-in-out; /* Transition douce pour le changement de largeur */
+  }
+  

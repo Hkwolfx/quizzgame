@@ -1,0 +1,34 @@
+.card {
+    background-color: #fff; /* Couleur de fond de la carte */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
+    margin: auto; /* Marge autour de la carte */
+    padding: 20px;
+    max-width: 300px; /* Largeur maximale de la carte */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition pour les effets au survol */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Déplacement vers le haut au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
+}
+
+.card-header {
+    font-size: 1.2em; /* Taille de la police pour l'en-tête */
+    margin-bottom: 15px; /* Marge en dessous de l'en-tête */
+}
+
+.card-body {
+    font-size: 1em; /* Taille de la police pour le corps */
+}
+
+.card-footer {
+    font-size: 0.8em; /* Taille de la police pour le pied de page */
+    text-align: right; /* Alignement du texte à droite */
+}
+
+.container {
+    display: flex; /* Active Flexbox */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+}
