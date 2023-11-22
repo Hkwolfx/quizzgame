@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.2.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -19,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-   "test": "jest --json --outputFile=testResults.json & del public\\testResults.json & move testResults.json public\\",
+    "test": "jest --json --outputFile=testResults.json & del public\\testResults.json & move testResults.json public\\",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
