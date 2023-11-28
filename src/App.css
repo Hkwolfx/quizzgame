@@ -18,6 +18,10 @@ body {
   margin-top: 20px;
 }
 
+li{
+  list-style: none;
+}
+
 .TestLights {
   display: flex;
   flex-direction: row;
