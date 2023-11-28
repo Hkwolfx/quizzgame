@@ -1,5 +1,6 @@
 .progress-bar-container {
     width: 100%;
+    margin-top: 80px;
     background-color: #e0e0e0;
     border-radius: 5px;
     overflow: hidden; /* Assure que la barre interne reste dans les coins arrondis */
@@ -7,7 +8,12 @@
   
   .progress-bar {
     height: 20px;
-    background-color: #4caf50; /* Couleur de remplissage de la jauge */
+    animation: colorChange 8s infinite;
     transition: width 1s ease-in-out; /* Transition douce pour le changement de largeur */
   }
   
+  @keyframes colorChange {
+    0% { background-color: green; }
+    50% { background-color: yellow; }
+    100% { background-color: red; }
+}

@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({ question, reponses, bonneReponse, showRespo
           {!showResponse ? (
             <Response reponses={reponses} />
           ) : (
-            <div>Bonne réponse: {reponses[bonneReponse]}</div>
+            <div className='bonnereponse'>Bonne réponse: {reponses[bonneReponse]}</div>
           )}
         </div>
       </div>
