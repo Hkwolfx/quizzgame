@@ -8,6 +8,10 @@
   min-height: 100vh; /* Hauteur minimale pour prendre toute la hauteur de la vue */
   margin: 0;
 }
+body {
+  background-color: #faf0e6b6; /* Couleur blanc cassé */
+  background-blend-mode: multiply; /* Mélange la couleur de fond et l'image de texture */
+}
 
 .count-container {
   display: flex;
@@ -41,4 +45,57 @@
 
 .play-button:hover, .pause-button:hover {
   transform: scale(1.1);
+}
+
+@keyframes bounce {
+  0%, 100% { 
+      transform: translateY(0) rotateX(0) rotateY(0);
+  }
+  25% { 
+      transform: translateY(-100px) rotateX(180deg) rotateY(0);
+  }
+  50% { 
+      transform: translateY(0) rotateX(180deg) rotateY(180deg);
+  }
+  75% { 
+      transform: translateY(-100px) rotateX(0) rotateY(180deg);
+  }
+}
+
+.cube {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 30px;
+  transform-style: preserve-3d;
+  animation: rotate 5s infinite linear;
+  top:0px;
+  z-index: 99999;
+}
+
+.cube-handle {
+  width: 150px; /* Plus grande que le cube */
+  height: 150px; /* Plus grande que le cube */
+  position: relative;
+}
+
+.cube .face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid black;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Ajout de l'ombre portée */
+}
+
+.cube .front  { transform: translateZ(50px); }
+.cube .back   { transform: rotateY(180deg) translateZ(50px); }
+.cube .right  { transform: rotateY(90deg) translateZ(50px); }
+.cube .left   { transform: rotateY(-90deg) translateZ(50px); }
+.cube .top    { transform: rotateX(90deg) translateZ(50px); }
+.cube .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+@keyframes rotate {
+  from { transform: rotateX(0) rotateY(0); }
+  to { transform: rotateX(360deg) rotateY(360deg); }
 }

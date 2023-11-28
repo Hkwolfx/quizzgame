@@ -5,6 +5,7 @@ import ProgressBar from './components/ProgressBar';
 import TestResults from './components/TestResults';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import './App.css';
+import { initializeDragAndDrop } from './dragnDrop';
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -50,11 +51,26 @@ const App = () => {
     setIsPaused(true);
   };
 
+  useEffect(() => {
+    initializeDragAndDrop();
+}, []);
+
   const currentQuestion: Question = questions[currentQuestionIndex];
 
   
     return (
       <div className="App">
+        <div className="cube-handle">
+       <div className="cube">
+    <div className="face front"></div>
+    <div className="face back"></div>
+    <div className="face right"></div>
+    <div className="face left"></div>
+    <div className="face top"></div>
+    <div className="face bottom"></div>
+    </div>
+</div>
+
         {isPlaying 
           ? <button className="pause-button" onClick={handlePauseClick}><FaPause size={30} /></button>
           : <button className="play-button" onClick={handlePlayClick}><FaPlay size={30} /></button>
