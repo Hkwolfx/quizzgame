@@ -6,6 +6,7 @@ import TestResults from "./components/TestResults";
 import { FaPlay, FaPause } from "react-icons/fa";
 import "./App.css";
 import { initializeDragAndDrop } from "./dragnDrop";
+import { sendQuestionToOCR } from './api';
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -35,11 +36,18 @@ const App = () => {
       }, responseTime);
     }
 
+    if (questions[currentQuestionIndex]) {
+      sendQuestionToOCR(questions[currentQuestionIndex].question)
+        .then(data => {
+          console.log('Réponse du serveur:', data);
+          // Traite ici la réponse du serveur, comme afficher le résultat OCR
+        })};
+
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [secondsLeft, isPlaying, isPaused]);
+  }, [secondsLeft, isPlaying, isPaused, currentQuestionIndex]);
 
   const handlePlayClick = () => {
     setIsPlaying(true);
