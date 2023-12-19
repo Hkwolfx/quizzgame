@@ -14,6 +14,7 @@ const App = () => {
   const [showResponse, setShowResponse] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [ocrText, setOcrText] = useState('');
 
   const responseTime = 3000; // 3 secondes pour afficher la réponse
 
@@ -39,9 +40,17 @@ const App = () => {
     if (questions[currentQuestionIndex]) {
       sendQuestionToOCR(questions[currentQuestionIndex].question)
         .then(data => {
-          console.log('Réponse du serveur:', data);
-          // Traite ici la réponse du serveur, comme afficher le résultat OCR
-        })};
+          if (data && data.extractedText) {
+            setOcrText(data.extractedText);
+          } else {
+            // Gère le cas où data est undefined ou n'a pas la propriété extractedText
+            console.log('Réponse du serveur manquante ou incorrecte:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Erreur lors de l envoi de la question au serveur:', error);
+        });
+    }
 
     return () => {
       clearInterval(interval);

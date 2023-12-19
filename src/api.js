@@ -1,6 +1,6 @@
 export const sendQuestionToOCR = async (questionText) => {
     try {
-      const response = await fetch('http://localhost:3000/start-ocr', {
+      const response = await fetch('http://localhost:3000/start-ocr-tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: questionText })
