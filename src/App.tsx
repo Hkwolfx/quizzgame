@@ -20,6 +20,16 @@ const App = () => {
     let interval: NodeJS.Timeout;
     let timeout: NodeJS.Timeout;
 
+    fetch('http://localhost:3000/')
+      .then(response => response.json())
+      .then(data => {
+        // Faire quelque chose avec les données reçues
+        console.log('Données reçues :', data)
+      })
+      .catch(error => {
+        console.error('Une erreur s\'est produite lors de la requête :', error);
+      });
+
     if (secondsLeft > 0 && isPlaying && !isPaused) {
       interval = setInterval(() => {
         setSecondsLeft((prevSeconds) => prevSeconds - 1);
