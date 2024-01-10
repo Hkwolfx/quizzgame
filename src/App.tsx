@@ -49,6 +49,20 @@ fetch('http://localhost:3000/')
     console.error('An error occurred during the request:', error);
   });
 
+  fetch('http://localhost:3000/start')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Analyser la réponse en JSON
+  })
+  .then(data => {
+    console.log('Received data:', data);
+  })
+  .catch(error => {
+    console.error('An error occurred during the request:', error);
+  });
+
 
     if (secondsLeft > 0 && isPlaying && !isPaused) {
       interval = setInterval(() => {
