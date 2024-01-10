@@ -20,15 +20,35 @@ const App = () => {
     let interval: NodeJS.Timeout;
     let timeout: NodeJS.Timeout;
 
-    fetch('http://localhost:3000/')
-      .then(response => response.json())
-      .then(data => {
-        // Faire quelque chose avec les données reçues
-        console.log('Données reçues :', data)
-      })
-      .catch(error => {
-        console.error('Une erreur s\'est produite lors de la requête :', error);
-      });
+    // fetch('http://localhost:3000/start')
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json(); // Parse the response as JSON
+    //   })
+    //   .then(data => {
+    //     // Faire quelque chose avec les données reçues
+    //     console.log('START Données reçues :', JSON.stringify(data));
+    //   })
+    //   .catch(error => {
+    //     console.error('Une erreur s\'est produite lors de la requête :', error);
+    //   });
+
+fetch('http://localhost:3000/')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Analyser la réponse en JSON
+  })
+  .then(data => {
+    console.log('Received data:', data);
+  })
+  .catch(error => {
+    console.error('An error occurred during the request:', error);
+  });
+
 
     if (secondsLeft > 0 && isPlaying && !isPaused) {
       interval = setInterval(() => {
