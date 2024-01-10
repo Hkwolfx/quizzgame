@@ -16,26 +16,21 @@ const App = () => {
 
   const responseTime = 3000; // 3 secondes pour afficher la réponse
 
+
+
+
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    let timeout: NodeJS.Timeout;
+  let interval: NodeJS.Timeout;
+  let timeout: NodeJS.Timeout;
 
-    // fetch('http://localhost:3000/start')
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.json(); // Parse the response as JSON
-    //   })
-    //   .then(data => {
-    //     // Faire quelque chose avec les données reçues
-    //     console.log('START Données reçues :', JSON.stringify(data));
-    //   })
-    //   .catch(error => {
-    //     console.error('Une erreur s\'est produite lors de la requête :', error);
-    //   });
+  if (secondsLeft > 0 && isPlaying && !isPaused) {
+    interval = setInterval(() => {
+      setSecondsLeft((prevSeconds) => prevSeconds - 1);
+    }, 1000);
+  } else if (secondsLeft === 0) {
+    setShowResponse(true);
 
-fetch('http://localhost:3000/')
+  fetch('http://localhost:3000/')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -48,42 +43,36 @@ fetch('http://localhost:3000/')
   .catch(error => {
     console.error('An error occurred during the request:', error);
   });
+    // Appel à /start lorsque le timer atteint 0
+    fetch('http://localhost:3000/start')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // Analyser la réponse en JSON
+      })
+      .then(data => {
+        console.log('Received data:', data);
+      })
+      .catch(error => {
+        console.error('An error occurred during the request:', error);
+      });
 
-  fetch('http://localhost:3000/start')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json(); // Analyser la réponse en JSON
-  })
-  .then(data => {
-    console.log('Received data:', data);
-  })
-  .catch(error => {
-    console.error('An error occurred during the request:', error);
-  });
+    timeout = setTimeout(() => {
+      setShowResponse(false);
+      setCurrentQuestionIndex((prevIndex) =>
+        prevIndex < questions.length - 1 ? prevIndex + 1 : 0
+      );
+      setSecondsLeft(10); // Réinitialisation à 10 secondes
+    }, responseTime);
+  }
 
+  return () => {
+    clearInterval(interval);
+    clearTimeout(timeout);
+  };
+}, [secondsLeft, isPlaying, isPaused]);
 
-    if (secondsLeft > 0 && isPlaying && !isPaused) {
-      interval = setInterval(() => {
-        setSecondsLeft((prevSeconds) => prevSeconds - 1);
-      }, 1000);
-    } else if (secondsLeft === 0) {
-      setShowResponse(true);
-      timeout = setTimeout(() => {
-        setShowResponse(false);
-        setCurrentQuestionIndex((prevIndex) =>
-          prevIndex < questions.length - 1 ? prevIndex + 1 : 0
-        );
-        setSecondsLeft(10); // Réinitialisation à 10 secondes
-      }, responseTime);
-    }
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [secondsLeft, isPlaying, isPaused]);
 
   const handlePlayClick = () => {
     setIsPlaying(true);
