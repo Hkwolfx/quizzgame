@@ -13,8 +13,10 @@ const App = () => {
   const [showResponse, setShowResponse] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isAudioPlayed, setIsAudioPlayed] = useState(false);
 
-  const responseTime = 3000; // 3 secondes pour afficher la réponse
+
+  const responseTime = 5000; // 5 secondes pour afficher la réponse
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -22,6 +24,7 @@ const App = () => {
     if (secondsLeft > 0 && isPlaying && !isPaused && !showResponse) {
       // Vérifiez si c'est le début du timer
       if (secondsLeft === 30 && !showResponse) { // Déclenchez /start au début du timer
+        setTimeout(() => {
         fetch('http://localhost:3000/start')
           .then(response => {
             if (!response.ok) {
@@ -31,11 +34,13 @@ const App = () => {
           })
           .then(data => {
             console.log('Received data:', data);
+            setIsAudioPlayed(data.audioPlayed);
           })
           .catch(error => {
             console.error('An error occurred during the request:', error);
           });
-      }
+      }, 3000)
+    }
   
       interval = setInterval(() => {
         setSecondsLeft((prevSeconds) => prevSeconds - 1);
@@ -51,11 +56,27 @@ const App = () => {
         setSecondsLeft(30); // Réinitialisé à 30 secondes
       }, responseTime);
     }
+
+    if (showResponse) {
+      fetch('/stop', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Received data:', data);
+      })
+      .catch(error => {
+        console.error('An error occurred during the request:', error);
+      });
+    }
   
     return () => {
       clearInterval(interval);
     };
-  }, [secondsLeft, isPlaying, isPaused]);
+  }, [secondsLeft, isPlaying, isPaused, showResponse]);
 
   const handlePlayClick = () => {
     setIsPlaying(true);
