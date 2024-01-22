@@ -1,7 +1,7 @@
 .card {
     background-color: #fff; /* Couleur de fond de la carte */
     border-radius: 10px; /* Coins arrondis */
-    border: 1px solid black;
+    border: 3px solid black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
     margin: auto; /* Marge autour de la carte */
     padding: 20px;
@@ -19,7 +19,7 @@
 }
 
 .card-header {
-    font-size: 1.5em; /* Taille de la police pour l'en-tête */
+    font-size: 1.2em; /* Taille de la police pour l'en-tête */
     margin-bottom: 15px; /* Marge en dessous de l'en-tête */
 }
 
@@ -45,8 +45,4 @@
 
 .bonnereponse {
  font-size: larger;   background-color: #00FF00;
-}
-
-.h2 {
-    
 }

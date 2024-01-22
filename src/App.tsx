@@ -14,6 +14,7 @@ const App = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isAudioPlayed, setIsAudioPlayed] = useState(false);
+  const [isCardVisible, setIsCardVisible] = useState(true); // Nouvel état pour la visibilité de Card
 
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
@@ -81,11 +82,13 @@ const App = () => {
   const handlePlayClick = () => {
     setIsPlaying(true);
     setIsPaused(false);
+    setIsCardVisible(true);
   };
 
   const handlePauseClick = () => {
     setIsPlaying(false);
     setIsPaused(true);
+    setIsCardVisible(false);
   };
 
   useEffect(() => {
@@ -120,12 +123,15 @@ const App = () => {
           <FaPlay size={30} />
         </button>
       )}
+      <div style={{ visibility: isCardVisible ? "visible" : "hidden" }} >
       <Card
+          
         question={currentQuestion.question}
         reponses={currentQuestion.reponses}
         bonneReponse={currentQuestion.bonneReponse}
         showResponse={showResponse}
       />
+      </div>
       {!showResponse && <ProgressBar value={secondsLeft} maxValue={10} />}
       <TestResults />
     </div>
