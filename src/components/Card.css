@@ -6,7 +6,9 @@
     margin: auto; /* Marge autour de la carte */
     padding: 20px;
     width: 800px;
-    min-width: max-content;
+    height: 360px;
+    min-height: 360px;
+    min-width: 800px;
     max-width: 800px; /* Largeur maximale de la carte */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition pour les effets au survol */
 }
@@ -17,7 +19,7 @@
 }
 
 .card-header {
-    font-size: 1.2em; /* Taille de la police pour l'en-tête */
+    font-size: 1.5em; /* Taille de la police pour l'en-tête */
     margin-bottom: 15px; /* Marge en dessous de l'en-tête */
 }
 
@@ -26,7 +28,8 @@
     align-items: center;
     flex-direction: column;
     display: flex;
-
+    font-size: xx-large;
+    font-weight: bold;
 }
 
 .card-footer {
@@ -42,4 +45,8 @@
 
 .bonnereponse {
  font-size: larger;   background-color: #00FF00;
+}
+
+.h2 {
+    
 }
