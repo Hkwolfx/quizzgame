@@ -9,46 +9,86 @@ import { initializeDragAndDrop } from "./dragnDrop";
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(10); // Durée augmentée à 10 secondes
+  const [secondsLeft, setSecondsLeft] = useState(30); // Initialisé à 30 secondes
   const [showResponse, setShowResponse] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isAudioPlayed, setIsAudioPlayed] = useState(false);
+  const [isCardVisible, setIsCardVisible] = useState(true); // Nouvel état pour la visibilité de Card
 
-  const responseTime = 3000; // 3 secondes pour afficher la réponse
+
+  const responseTime = 5000; // 5 secondes pour afficher la réponse
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    let timeout: NodeJS.Timeout;
-
-    if (secondsLeft > 0 && isPlaying && !isPaused) {
+  
+    if (secondsLeft > 0 && isPlaying && !isPaused && !showResponse) {
+      // Vérifiez si c'est le début du timer
+      if (secondsLeft === 30 && !showResponse) { // Déclenchez /start au début du timer
+        setTimeout(() => {
+        fetch('http://localhost:3000/start')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('Received data:', data);
+            setIsAudioPlayed(data.audioPlayed);
+          })
+          .catch(error => {
+            console.error('An error occurred during the request:', error);
+          });
+      }, 3000)
+    }
+  
       interval = setInterval(() => {
         setSecondsLeft((prevSeconds) => prevSeconds - 1);
       }, 1000);
     } else if (secondsLeft === 0) {
       setShowResponse(true);
-      timeout = setTimeout(() => {
+  
+      setTimeout(() => {
         setShowResponse(false);
         setCurrentQuestionIndex((prevIndex) =>
           prevIndex < questions.length - 1 ? prevIndex + 1 : 0
         );
-        setSecondsLeft(10); // Réinitialisation à 10 secondes
+        setSecondsLeft(30); // Réinitialisé à 30 secondes
       }, responseTime);
     }
 
+    if (showResponse) {
+      fetch('/stop', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Received data:', data);
+      })
+      .catch(error => {
+        console.error('An error occurred during the request:', error);
+      });
+    }
+  
     return () => {
       clearInterval(interval);
-      clearTimeout(timeout);
     };
-  }, [secondsLeft, isPlaying, isPaused]);
+  }, [secondsLeft, isPlaying, isPaused, showResponse]);
 
   const handlePlayClick = () => {
     setIsPlaying(true);
     setIsPaused(false);
+    setIsCardVisible(true);
   };
 
   const handlePauseClick = () => {
     setIsPlaying(false);
     setIsPaused(true);
+    setIsCardVisible(false);
   };
 
   useEffect(() => {
@@ -83,12 +123,15 @@ const App = () => {
           <FaPlay size={30} />
         </button>
       )}
+      <div style={{ visibility: isCardVisible ? "visible" : "hidden" }} >
       <Card
+          
         question={currentQuestion.question}
         reponses={currentQuestion.reponses}
         bonneReponse={currentQuestion.bonneReponse}
         showResponse={showResponse}
       />
+      </div>
       {!showResponse && <ProgressBar value={secondsLeft} maxValue={10} />}
       <TestResults />
     </div>

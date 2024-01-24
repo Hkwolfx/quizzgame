@@ -1,9 +1,9 @@
 import React from 'react';
-import './ProgressBar.css'; // Assurez-vous d'ajouter le fichier CSS correspondant
+import './ProgressBar.css'; // Assurez-vous que le fichier CSS correspondant est ajouté
 
 interface ProgressBarProps {
-  value: number; // La valeur actuelle de la jauge (par exemple, le nombre de secondes restantes)
-  maxValue: number; // La valeur maximale de la jauge (par exemple, la durée totale en secondes)
+  value: number; // La valeur actuelle de la jauge
+  maxValue: number; // La valeur maximale de la jauge
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ value, maxValue }) => {
@@ -12,6 +12,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, maxValue }) => {
   return (
     <div className="progress-bar-container">
       <div className="progress-bar" style={{ width: `${widthPercentage}%` }}></div>
+      <div className="progress-bar-timer">{`${value}`}</div>
     </div>
   );
 };

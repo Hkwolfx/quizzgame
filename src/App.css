@@ -4,12 +4,15 @@
   flex-direction: column;
   align-items: center; /* Centre les éléments horizontalement dans un flex container */
   justify-content: center; /* Centre les éléments verticalement */
-  /* background-image: url('./Show.png'); Chemin vers l'image de fond */
   min-height: 100vh; /* Hauteur minimale pour prendre toute la hauteur de la vue */
   margin: 0;
 }
+
 body {
-  background-color: #faf0e6b6; /* Couleur blanc cassé */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: inherit;
+  background-image: url('./Quizboost.jpg'); 
   background-blend-mode: multiply; /* Mélange la couleur de fond et l'image de texture */
 }
 
@@ -38,7 +41,7 @@ li{
   height: 100px;
   border-radius: 50%;
   background-color: #fff;
-  border: 1px solid #000;
+  border: 3px solid #000;
   display: flex;
   justify-content: center;
   flex-direction: column;

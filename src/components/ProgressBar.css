@@ -1,17 +1,31 @@
 .progress-bar-container {
     width: 100%;
     margin-top: 80px;
-    background-color: #e0e0e0;
     border-radius: 5px;
+    position: relative; /* Positionnement relatif pour que les enfants soient positionnés par rapport à ce conteneur */
     overflow: hidden; /* Assure que la barre interne reste dans les coins arrondis */
   }
   
   .progress-bar {
     height: 20px;
-    animation: colorChange 8s infinite;
+    animation: colorChange 30s infinite;
     transition: width 1s ease-in-out; /* Transition douce pour le changement de largeur */
   }
   
+  .progress-bar-timer {
+    width: 20px;
+    z-index:1;
+    right: 0;
+    margin-left: 49%;
+    font-weight: bold;
+    bottom: 100%; /* Positionner au-dessus de la barre */
+    color: black; /* Couleur du texte */
+    background-color: white; /* Couleur de fond pour contraste */
+    padding: 5px;
+    border: 3px solid black; /* Bordure pour visibilité */
+    border-radius: 50%;
+  }
+
   @keyframes colorChange {
     0% { background-color: green; }
     50% { background-color: yellow; }
