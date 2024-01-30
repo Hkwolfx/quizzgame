@@ -6,6 +6,7 @@ import TestResults from "./components/TestResults";
 import { FaPlay, FaPause } from "react-icons/fa";
 import "./App.css";
 import { initializeDragAndDrop } from "./dragnDrop";
+import Ranking from "./components/Ranking";
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -113,6 +114,8 @@ const App = () => {
           <div className="face bottom"></div>
         </div>
       </div>
+
+      <Ranking />
 
       {isPlaying ? (
         <button className="pause-button" onClick={handlePauseClick}>
