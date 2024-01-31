@@ -27,7 +27,24 @@ const App = () => {
       // Vérifiez si c'est le début du timer
       if (secondsLeft === 30 && !showResponse) { // Déclenchez /start au début du timer
         setTimeout(() => {
-        fetch('http://localhost:3000/start')
+          console.log('questions:', questions);
+console.log('currentQuestionIndex:', currentQuestionIndex);
+console.log('question before conversion:', questions[currentQuestionIndex].question);
+
+          const currentQuestionData = {
+            question: currentQuestionIndex,
+            bonneReponse: questions[currentQuestionIndex].bonneReponse,
+          };
+
+          console.log('question after conversion:', currentQuestionData.question);
+          console.log('bonne réponse', currentQuestionData.bonneReponse);
+          fetch('http://localhost:3000/start', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(currentQuestionData),
+          })
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -41,21 +58,21 @@ const App = () => {
           .catch(error => {
             console.error('An error occurred during the request:', error);
           });
-      }, 3000)
-    }
-  
+        }, 3000);
+      }
+
       interval = setInterval(() => {
         setSecondsLeft((prevSeconds) => prevSeconds - 1);
       }, 1000);
     } else if (secondsLeft === 0) {
       setShowResponse(true);
-  
+
       setTimeout(() => {
         setShowResponse(false);
         setCurrentQuestionIndex((prevIndex) =>
           prevIndex < questions.length - 1 ? prevIndex + 1 : 0
         );
-        setSecondsLeft(30); // Réinitialisé à 30 secondes
+        setSecondsLeft(30);
       }, responseTime);
     }
 
@@ -74,11 +91,11 @@ const App = () => {
         console.error('An error occurred during the request:', error);
       });
     }
-  
+
     return () => {
       clearInterval(interval);
     };
-  }, [secondsLeft, isPlaying, isPaused, showResponse]);
+  }, [secondsLeft, isPlaying, isPaused, showResponse, currentQuestionIndex]);
 
   const handlePlayClick = () => {
     setIsPlaying(true);
