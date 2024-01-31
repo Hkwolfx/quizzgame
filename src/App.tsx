@@ -10,93 +10,70 @@ import Ranking from "./components/Ranking";
 
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(30); // Initialisé à 30 secondes
+  const [secondsLeft, setSecondsLeft] = useState(30);
   const [showResponse, setShowResponse] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isAudioPlayed, setIsAudioPlayed] = useState(false);
-  const [isCardVisible, setIsCardVisible] = useState(true); // Nouvel état pour la visibilité de Card
-
+  const [isCardVisible, setIsCardVisible] = useState(true);
+  const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
+  // Timer pour le compte à rebours
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-  
     if (secondsLeft > 0 && isPlaying && !isPaused && !showResponse) {
-      // Vérifiez si c'est le début du timer
-      if (secondsLeft === 30 && !showResponse) { // Déclenchez /start au début du timer
-        setTimeout(() => {
-          console.log('questions:', questions);
-console.log('currentQuestionIndex:', currentQuestionIndex);
-console.log('question before conversion:', questions[currentQuestionIndex].question);
-
-          const currentQuestionData = {
-            question: currentQuestionIndex,
-            bonneReponse: questions[currentQuestionIndex].bonneReponse,
-          };
-
-          console.log('question after conversion:', currentQuestionData.question);
-          console.log('bonne réponse', currentQuestionData.bonneReponse);
-          fetch('http://localhost:3000/start', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(currentQuestionData),
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Received data:', data);
-            setIsAudioPlayed(data.audioPlayed);
-          })
-          .catch(error => {
-            console.error('An error occurred during the request:', error);
-          });
-        }, 3000);
-      }
-
-      interval = setInterval(() => {
-        setSecondsLeft((prevSeconds) => prevSeconds - 1);
+      const interval = setInterval(() => {
+        setSecondsLeft(secondsLeft - 1);
       }, 1000);
-    } else if (secondsLeft === 0) {
+      return () => clearInterval(interval);
+    } else if (secondsLeft === 0 && !showResponse) {
       setShowResponse(true);
-
       setTimeout(() => {
         setShowResponse(false);
-        setCurrentQuestionIndex((prevIndex) =>
-          prevIndex < questions.length - 1 ? prevIndex + 1 : 0
-        );
-        setSecondsLeft(30);
+        setCurrentQuestionIndex((prevIndex) => prevIndex < questions.length - 1 ? prevIndex + 1 : 0);
+        setSecondsLeft(30); // Réinitialisation pour la prochaine question
+        setStartSent(false); // Réinitialisation de l'envoi de la requête pour la prochaine question
       }, responseTime);
     }
+  }, [secondsLeft, isPlaying, isPaused, showResponse]);
 
-    if (showResponse) {
-      fetch('/stop', {
-        method: 'GET',
+  // Envoi de la requête au début de chaque question
+  useEffect(() => {
+    if (secondsLeft === 30 && !startSent && !showResponse) {
+      setStartSent(true); // Empêcher les envois multiples
+      const currentQuestionData = {
+        question: currentQuestionIndex,
+        bonneReponse: questions[currentQuestionIndex].bonneReponse,
+      };
+      console.log(currentQuestion, "1")
+      console.log(currentQuestionData, "2")
+      console.log(currentQuestionIndex, "3")
+      console.log('Données émises :', currentQuestion.bonneReponse)
+      console.log('Données émises :', currentQuestion.question)
+      fetch('http://localhost:3000/start', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(currentQuestionData),
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log('Received data:', data);
+        setIsAudioPlayed(data.audioPlayed);
       })
       .catch(error => {
         console.error('An error occurred during the request:', error);
       });
     }
+  }, [currentQuestionIndex, secondsLeft, showResponse, startSent]);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [secondsLeft, isPlaying, isPaused, showResponse, currentQuestionIndex]);
-
+  // Boutons de contrôle
   const handlePlayClick = () => {
     setIsPlaying(true);
     setIsPaused(false);
