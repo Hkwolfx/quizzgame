@@ -17,6 +17,7 @@ const App = () => {
   const [isAudioPlayed, setIsAudioPlayed] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(true);
   const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
+  const [meilleursJoueurs, setMeilleursJoueurs] = useState([]);
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
@@ -66,6 +67,9 @@ const App = () => {
       })
       .then(data => {
         setIsAudioPlayed(data.audioPlayed);
+        setMeilleursJoueurs(data.meilleursJoueurs);
+        console.log('Données reçues :', meilleursJoueurs);
+        console.log('Données reçues :', data.meilleursJoueurs)
       })
       .catch(error => {
         console.error('An error occurred during the request:', error);
