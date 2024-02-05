@@ -113,7 +113,7 @@ const App = () => {
         </div>
       </div>
 
-      <Ranking />
+      <Ranking meilleursJoueurs={meilleursJoueurs} />
 
       {isPlaying ? (
         <button className="pause-button" onClick={handlePauseClick}>

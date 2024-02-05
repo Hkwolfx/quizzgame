@@ -1,8 +1,8 @@
 import React from "react";
-import { FaShare } from 'react-icons/fa';
-import "./Ranking.css"; // Assurez-vous de créer ce fichier CSS
+import { FaShare } from "react-icons/fa";
+import "./Ranking.css";
 
-const Ranking = () => {
+const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
   return (
     <main
       style={{
@@ -72,198 +72,53 @@ const Ranking = () => {
             color: "#141a39",
           }}
         >
-          <tr
-            style={{
-              transition: "all 0.2s ease-in-out",
-              borderRadius: "0.2rem",
-            }}
-          >
-            <td
-              className="number"
+          {meilleursJoueurs.map((joueur: any, index: number) => (
+            <tr
+              key={joueur.userId}
               style={{
-                width: "1rem",
-                fontSize: "2.2rem",
-                fontWeight: "bold",
-                textAlign: "left",
+                transition: "all 0.2s ease-in-out",
+                borderRadius: "0.2rem",
               }}
             >
-              1
-            </td>
-            <td
-              className="name"
-              style={{ textAlign: "left", fontSize: "1.2rem" }}
-            >
-              Lee Taeyong
-            </td>
-            <td
-              className="points"
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.3rem",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              258.244{" "}
-              <img
-                className="gold-medal"
-                src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
-                alt="gold medal"
-                style={{ height: "3rem", marginLeft: "1.5rem" }}
-              />
-            </td>
-          </tr>
-          <tr
-            style={{
-              transition: "all 0.2s ease-in-out",
-              borderRadius: "0.2rem",
-            }}
-          >
-            <td
-              className="number"
-              style={{
-                width: "1rem",
-                fontSize: "2.2rem",
-                fontWeight: "bold",
-                textAlign: "left",
-              }}
-            >
-              2
-            </td>
-            <td
-              className="name"
-              style={{ textAlign: "left", fontSize: "1.2rem" }}
-            >
-              Alex Azimov
-            </td>
-            <td
-              className="points"
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.3rem",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              258.200{" "}
-          
-            </td>
-          </tr>
-          <tr
-            style={{
-              transition: "all 0.2s ease-in-out",
-              borderRadius: "0.2rem",
-            }}
-          >
-            <td
-              className="number"
-              style={{
-                width: "1rem",
-                fontSize: "2.2rem",
-                fontWeight: "bold",
-                textAlign: "left",
-              }}
-            >
-              3
-            </td>
-            <td
-              className="name"
-              style={{ textAlign: "left", fontSize: "1.2rem" }}
-            >
-              Roger Road
-            </td>
-            <td
-              className="points"
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.3rem",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              258.141{" "}
-           
-            </td>
-          </tr>
-          <tr
-            style={{
-              transition: "all 0.2s ease-in-out",
-              borderRadius: "0.2rem",
-            }}
-          >
-            <td
-              className="number"
-              style={{
-                width: "1rem",
-                fontSize: "2.2rem",
-                fontWeight: "bold",
-                textAlign: "left",
-              }}
-            >
-              4
-            </td>
-            <td
-              className="name"
-              style={{ textAlign: "left", fontSize: "1.2rem" }}
-            >
-              Nina None
-            </td>
-            <td
-              className="points"
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.3rem",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              258.100{" "}
-          
-            </td>
-          </tr>
-          <tr
-            style={{
-              transition: "all 0.2s ease-in-out",
-              borderRadius: "0.2rem",
-            }}
-          >
-            <td
-              className="number"
-              style={{
-                width: "1rem",
-                fontSize: "2.2rem",
-                fontWeight: "bold",
-                textAlign: "left",
-              }}
-            >
-              6
-            </td>
-            <td
-              className="name"
-              style={{ textAlign: "left", fontSize: "1.2rem" }}
-            >
-              Tiny Tina
-            </td>
-            <td
-              className="points"
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.3rem",
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              258.050{" "}
-        
-            </td>
-          </tr>
+              <td
+                className="number"
+                style={{
+                  width: "1rem",
+                  fontSize: "2.2rem",
+                  fontWeight: "bold",
+                  textAlign: "left",
+                }}
+              >
+                {index + 1}
+              </td>
+              <td
+                className="name"
+                style={{ textAlign: "left", fontSize: "1.2rem" }}
+              >
+                {joueur.userId}{" "}
+                {/* Remplacez par joueur.userId si vous utilisez userId */}
+              </td>
+              <td
+                className="points"
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "1.3rem",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                }}
+              >
+                {joueur.score}
+                <img
+                  className="gold-medal"
+                  src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
+                  alt="gold medal"
+                  style={{ height: "3rem", marginLeft: "1.5rem" }}
+                />
+              </td>
+            </tr>
+          ))}
         </table>
-        {/* Boutons ici */}
       </div>
     </main>
   );
