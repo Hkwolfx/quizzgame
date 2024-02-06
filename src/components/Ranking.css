@@ -16,7 +16,7 @@
   
   main {
     width: 40rem;
-    height: 43rem;
+    height: 21rem !important;
     background-color: #ffffff;
     -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
     box-shadow: 0px 5px 15px 8px #e4e7fb;
@@ -32,6 +32,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 2.5rem 2rem;
+    height: 0%;
   }
   
   .share {
