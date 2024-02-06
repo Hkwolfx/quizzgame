@@ -72,7 +72,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
             color: "#141a39",
           }}
         >
-          {meilleursJoueurs.map((joueur: any, index: number) => (
+          {meilleursJoueurs.slice(0, 3).map((joueur, index) => (
             <tr
               key={joueur.userId}
               style={{
@@ -95,8 +95,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
                 className="name"
                 style={{ textAlign: "left", fontSize: "1.2rem" }}
               >
-                {joueur.uniqueId}{" "}
-                {/* Remplacez par joueur.userId si vous utilisez userId */}
+                {joueur.uniqueId}
               </td>
               <td
                 className="points"
@@ -109,12 +108,14 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
                 }}
               >
                 {joueur.score}
-                <img
-                  className="gold-medal"
-                  src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
-                  alt="gold medal"
-                  style={{ height: "3rem", marginLeft: "1.5rem" }}
-                />
+                {index === 0 && (
+                  <img
+                    className="gold-medal"
+                    src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true"
+                    alt="gold medal"
+                    style={{ height: "3rem", marginLeft: "1.5rem" }}
+                  />
+                )}
               </td>
             </tr>
           ))}
