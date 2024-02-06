@@ -8,6 +8,13 @@ import "./App.css";
 import { initializeDragAndDrop } from "./dragnDrop";
 import Ranking from "./components/Ranking";
 
+interface Joueur {
+  userId: string;
+  uniqueId: string;
+  score: number;
+}
+
+
 const App = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(30);
@@ -17,7 +24,7 @@ const App = () => {
   const [isAudioPlayed, setIsAudioPlayed] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(true);
   const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
-  const [meilleursJoueurs, setMeilleursJoueurs] = useState([]);
+  const [meilleursJoueurs, setMeilleursJoueurs] = useState<Joueur[]>([]);
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
@@ -42,38 +49,47 @@ const App = () => {
   // Envoi de la requête au début de chaque question
   useEffect(() => {
     if (secondsLeft === 30 && !startSent && !showResponse) {
-      setStartSent(true); // Empêcher les envois multiples
+      setStartSent(true); // Pour éviter les envois multiples
       const currentQuestionData = {
         question: currentQuestionIndex,
         bonneReponse: questions[currentQuestionIndex].bonneReponse,
       };
-      console.log(currentQuestion, "1")
-      console.log(currentQuestionData, "2")
-      console.log(currentQuestionIndex, "3")
-      console.log('Données émises :', currentQuestion.bonneReponse)
-      console.log('Données émises :', currentQuestion.question)
+      
+      console.log('Envoi des données au serveur pour la question:', currentQuestionData.question);
+
       fetch('http://localhost:3000/start', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(currentQuestionData),
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+      .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
       .then(data => {
         setIsAudioPlayed(data.audioPlayed);
-        setMeilleursJoueurs(data.meilleursJoueurs);
-        console.log('Données reçues :', meilleursJoueurs);
-        console.log('Données reçues :', data.meilleursJoueurs)
+        setMeilleursJoueurs((prevMeilleursJoueurs: Joueur[]) => {
+          const updatedScores: Joueur[] = data.meilleursJoueurs.map((joueurFromServer: Joueur) => {
+            const existingPlayerIndex = prevMeilleursJoueurs.findIndex(j => j.userId === joueurFromServer.userId);
+            if (existingPlayerIndex !== -1) {
+              const updatedPlayer: Joueur = {
+                ...prevMeilleursJoueurs[existingPlayerIndex],
+                score: prevMeilleursJoueurs[existingPlayerIndex].score + joueurFromServer.score,
+              };
+              return updatedPlayer;
+            } else {
+              return joueurFromServer;
+            }
+          });
+      
+          const filteredExistingPlayers = prevMeilleursJoueurs.filter(
+            joueurPrev => !updatedScores.some(joueurUpdated => joueurUpdated.userId === joueurPrev.userId)
+          );
+      
+          return [...filteredExistingPlayers, ...updatedScores].sort((a, b) => b.score - a.score);
+        });
+      
+        console.log('Mise à jour des meilleurs joueurs avec les nouveaux scores.');
       })
-      .catch(error => {
-        console.error('An error occurred during the request:', error);
-      });
+      
+      .catch(error => console.error('Erreur lors de la requête:', error));
     }
   }, [currentQuestionIndex, secondsLeft, showResponse, startSent]);
 
