@@ -80,12 +80,12 @@ li{
   top: 0px;
   z-index: 99999;
 }
-
+/* 
 .cube-handle {
   width: 150px;
   height: 150px;
   position: relative;
-}
+} */
 
 .cube .face {
   position: absolute;
