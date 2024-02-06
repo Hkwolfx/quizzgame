@@ -46,53 +46,56 @@ const App = () => {
     }
   }, [secondsLeft, isPlaying, isPaused, showResponse]);
 
-  // Envoi de la requête au début de chaque question
   useEffect(() => {
     if (secondsLeft === 30 && !startSent && !showResponse) {
       setStartSent(true); // Pour éviter les envois multiples
-      const currentQuestionData = {
-        question: currentQuestionIndex,
-        bonneReponse: questions[currentQuestionIndex].bonneReponse,
-      };
-      
-      console.log('Envoi des données au serveur pour la question:', currentQuestionData.question);
-
-      fetch('http://localhost:3000/start', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(currentQuestionData),
-      })
-      .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
-      .then(data => {
-        setIsAudioPlayed(data.audioPlayed);
-        setMeilleursJoueurs((prevMeilleursJoueurs: Joueur[]) => {
-          const updatedScores: Joueur[] = data.meilleursJoueurs.map((joueurFromServer: Joueur) => {
-            const existingPlayerIndex = prevMeilleursJoueurs.findIndex(j => j.userId === joueurFromServer.userId);
-            if (existingPlayerIndex !== -1) {
-              const updatedPlayer: Joueur = {
-                ...prevMeilleursJoueurs[existingPlayerIndex],
-                score: prevMeilleursJoueurs[existingPlayerIndex].score + joueurFromServer.score,
-              };
-              return updatedPlayer;
-            } else {
-              return joueurFromServer;
-            }
+  
+      // Ajout d'un délai de 3 secondes avant d'exécuter l'envoi des données
+      setTimeout(() => {
+        const currentQuestionData = {
+          question: currentQuestionIndex,
+          bonneReponse: questions[currentQuestionIndex].bonneReponse,
+        };
+  
+        console.log('Envoi des données au serveur pour la question:', currentQuestionData.question);
+  
+        fetch('http://localhost:3000/start', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(currentQuestionData),
+        })
+        .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
+        .then(data => {
+          setIsAudioPlayed(data.audioPlayed);
+          setMeilleursJoueurs((prevMeilleursJoueurs: Joueur[]) => {
+            const updatedScores: Joueur[] = data.meilleursJoueurs.map((joueurFromServer: Joueur) => {
+              const existingPlayerIndex = prevMeilleursJoueurs.findIndex(j => j.userId === joueurFromServer.userId);
+              if (existingPlayerIndex !== -1) {
+                const updatedPlayer: Joueur = {
+                  ...prevMeilleursJoueurs[existingPlayerIndex],
+                  score: prevMeilleursJoueurs[existingPlayerIndex].score + joueurFromServer.score,
+                };
+                return updatedPlayer;
+              } else {
+                return joueurFromServer;
+              }
+            });
+  
+            const filteredExistingPlayers = prevMeilleursJoueurs.filter(
+              joueurPrev => !updatedScores.some(joueurUpdated => joueurUpdated.userId === joueurPrev.userId)
+            );
+  
+            return [...filteredExistingPlayers, ...updatedScores].sort((a, b) => b.score - a.score);
           });
-      
-          const filteredExistingPlayers = prevMeilleursJoueurs.filter(
-            joueurPrev => !updatedScores.some(joueurUpdated => joueurUpdated.userId === joueurPrev.userId)
-          );
-      
-          return [...filteredExistingPlayers, ...updatedScores].sort((a, b) => b.score - a.score);
-        });
-      
-        console.log('Mise à jour des meilleurs joueurs avec les nouveaux scores.');
-      })
-      
-      .catch(error => console.error('Erreur lors de la requête:', error));
+  
+          console.log('Mise à jour des meilleurs joueurs avec les nouveaux scores.');
+        })
+        .catch(error => console.error('Erreur lors de la requête:', error));
+      }, 3000); // 3000 millisecondes = 3 secondes
     }
   }, [currentQuestionIndex, secondsLeft, showResponse, startSent]);
 
+  
   // Boutons de contrôle
   const handlePlayClick = () => {
     setIsPlaying(true);
