@@ -100,13 +100,13 @@ const App = () => {
   const handlePlayClick = () => {
     setIsPlaying(true);
     setIsPaused(false);
-    setIsCardVisible(true);
+    // setIsCardVisible(true);
   };
 
   const handlePauseClick = () => {
     setIsPlaying(false);
     setIsPaused(true);
-    setIsCardVisible(false);
+    // setIsCardVisible(false);
   };
 
   // useEffect(() => {
@@ -121,7 +121,7 @@ const App = () => {
       </div>
 
 
-<Ranking meilleursJoueurs={meilleursJoueurs} />
+
       {isPlaying ? (
         <button className="pause-button" onClick={handlePauseClick}>
           <FaPause size={30} />
@@ -139,7 +139,9 @@ const App = () => {
         bonneReponse={currentQuestion.bonneReponse}
         showResponse={showResponse}
       />
+      
       </div>
+      <Ranking meilleursJoueurs={meilleursJoueurs} />
       {!showResponse && <ProgressBar value={secondsLeft} maxValue={10} />}
       <TestResults />
     </div>

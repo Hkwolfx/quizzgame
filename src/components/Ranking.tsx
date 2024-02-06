@@ -31,6 +31,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
             fontFamily: "Rubik, sans-serif",
             fontSize: "1.7rem",
             color: "#141a39",
+            marginLeft: "230px",
             textTransform: "uppercase",
           }}
         >
@@ -39,6 +40,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
         <button
           className="share"
           style={{
+            textTransform: "uppercase",
             width: "4.5rem",
             height: "3rem",
             backgroundColor: "#f55e77",
@@ -51,11 +53,11 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
           <FaShare color="#fff" fontSize="2rem" />
         </button>
       </div>
-      <div id="leaderboard" style={{ width: "100%", position: "relative" }}>
+      <div id="leaderboard" style={{ width: "60%", position: "relative", marginLeft: "200px;" }}>
         <div
           className="ribbon"
           style={{
-            width: "42rem",
+            width: "34rem",
             height: "5.5rem",
             top: "-0.5rem",
             backgroundColor: "#5c5be5",
@@ -66,10 +68,14 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
         ></div>
         <table
           style={{
+            // marginLeft: "13rem",
             width: "100%",
+            textTransform: "uppercase",
+            fontWeight: "bold",
             borderCollapse: "collapse",
             tableLayout: "fixed",
             color: "#141a39",
+            
           }}
         >
           {meilleursJoueurs.slice(0, 3).map((joueur, index) => (
