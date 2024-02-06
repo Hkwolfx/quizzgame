@@ -33,7 +33,7 @@ export interface Question {
         bonneReponse: "c"
       },
       {
-        question: "L'eau bout à 100 degrés Celsius à niveau de la mer.",
+        question: "L'eau bout à 100 degrés Celsius.",
         reponses: { a: "Vrai", b: "Faux" },
         bonneReponse: "a"
       },
@@ -48,12 +48,12 @@ export interface Question {
         bonneReponse: "a"
       },
       {
-        question: "Le son voyage plus vite dans l'air que dans l'eau.",
+        question: "Le son va plus vite dans l'air.",
         reponses: { a: "Vrai", b: "Faux" },
         bonneReponse: "b"
       },
       {
-        question: "La lumière du soleil met environ 8 minutes pour atteindre la Terre.",
+        question: "les UV traversent les nuages.",
         reponses: { a: "Vrai", b: "Faux" },
         bonneReponse: "a"
       },
