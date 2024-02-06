@@ -5,7 +5,7 @@ import ProgressBar from "./components/ProgressBar";
 import TestResults from "./components/TestResults";
 import { FaPlay, FaPause } from "react-icons/fa";
 import "./App.css";
-import { initializeDragAndDrop } from "./dragnDrop";
+// import { initializeDragAndDrop } from "./_dragnDrop";
 import Ranking from "./components/Ranking";
 
 interface Joueur {
@@ -106,31 +106,19 @@ const App = () => {
     setIsCardVisible(false);
   };
 
-  useEffect(() => {
-    initializeDragAndDrop();
-  }, []);
+  // useEffect(() => {
+  //   initializeDragAndDrop();
+  // }, []);
 
   const currentQuestion: Question = questions[currentQuestionIndex];
 
   return (
     <div className="App">
       <div className="cube-handle">
-        <div className="cube">
-          <div className="face front">
-            <div className="blob"></div>
-          </div>
-          <div className="face back">
-            <div className="blob"></div>
-          </div>
-          <div className="face right"></div>
-          <div className="face left"></div>
-          <div className="face top"></div>
-          <div className="face bottom"></div>
-        </div>
       </div>
 
-      <Ranking meilleursJoueurs={meilleursJoueurs} />
 
+<Ranking meilleursJoueurs={meilleursJoueurs} />
       {isPlaying ? (
         <button className="pause-button" onClick={handlePauseClick}>
           <FaPause size={30} />
