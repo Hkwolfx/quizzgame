@@ -20,32 +20,32 @@ export const questions: Question[] = [
       c: "William Shakespeare",
       d: "Mark Twain",
     },
-    bonneReponse: "a",
+    bonneReponse: "A",
   },
   {
     question: "Quel est le plus grand océan?",
     reponses: { a: "Atlantique", b: "Indien", c: "Pacifique", d: "Arctique" },
-    bonneReponse: "c",
+    bonneReponse: "C",
   },
   {
     question: "Combien de planètes dans le système solaire?",
     reponses: { a: "7", b: "8", c: "9", d: "10" },
-    bonneReponse: "b",
+    bonneReponse: "B",
   },
   {
     question: "Combien de continents dans le monde?",
     reponses: { a: "4", b: "5", c: "6", d: "7" },
-    bonneReponse: "d",
+    bonneReponse: "D",
   },
   {
     question: "Capitale de la France?",
     reponses: { a: "Lyon", b: "Marseille", c: "Paris", d: "Nice" },
-    bonneReponse: "c",
+    bonneReponse: "C",
   },
   {
     question: "Symbole chimique de l'Oxygène?",
     reponses: { a: "Or", b: "Osmium", c: "Oxygène", d: "Oganesson" },
-    bonneReponse: "c",
+    bonneReponse: "D",
   },
   {
     question: "Kyoto est dans quel pays?",

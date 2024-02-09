@@ -23,6 +23,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isAudioPlayed, setIsAudioPlayed] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(true);
+  const [revealAnswers, setRevealAnswers] = useState(false); // Cet état contrôle l'affichage des options de réponse
   const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
   const [meilleursJoueurs, setMeilleursJoueurs] = useState<Joueur[]>([]);
 
@@ -49,8 +50,14 @@ const App = () => {
   useEffect(() => {
     if (secondsLeft === 30 && !startSent && !showResponse) {
       setStartSent(true); // Pour éviter les envois multiples
+      setRevealAnswers(false); // Commencer par cacher les réponses
   
-      // Ajout d'un délai de 3 secondes avant d'exécuter l'envoi des données
+      // Révéler les réponses 1 seconde avant d'envoyer la requête /start
+      setTimeout(() => {
+        setRevealAnswers(true);
+      }, 2000); // Attendre 2 secondes pour révéler les réponses, donc 1 seconde avant la requête /start
+  
+      // Ajout d'un délai total de 3 secondes avant d'exécuter l'envoi des données /start
       setTimeout(() => {
         const currentQuestionData = {
           question: currentQuestionIndex,
@@ -67,35 +74,13 @@ const App = () => {
         .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
         .then(data => {
           setIsAudioPlayed(data.audioPlayed);
-          // setMeilleursJoueurs((prevMeilleursJoueurs: Joueur[]) => {
-          //   const updatedScores: Joueur[] = data.meilleursJoueurs.map((joueurFromServer: Joueur) => {
-          //     const existingPlayerIndex = prevMeilleursJoueurs.findIndex(j => j.userId === joueurFromServer.userId);
-          //     if (existingPlayerIndex !== -1) {
-          //       const existingPlayer = prevMeilleursJoueurs[existingPlayerIndex];
-          //       if (joueurFromServer.score > existingPlayer.score) {
-          //         const updatedPlayer: Joueur = {
-          //           ...existingPlayer,
-          //           score: joueurFromServer.score,
-          //         };
-          //         return updatedPlayer;
-          //       }
-          //     }
-          //     return joueurFromServer;
-          //   });
-  
-          //   const filteredExistingPlayers = prevMeilleursJoueurs.filter(
-          //     joueurPrev => !updatedScores.some(joueurUpdated => joueurUpdated.userId === joueurPrev.userId)
-          //   );
-  
-          //   return [...filteredExistingPlayers, ...updatedScores].sort((a, b) => b.score - a.score);
-          // });
-  
-          // console.log('Mise à jour des meilleurs joueurs avec les nouveaux scores.');
+          // Ici, vous pouvez mettre à jour les états nécessaires après la réponse /start
         })
         .catch(error => console.error('Erreur lors de la requête:', error));
-      }, 3000); // 3000 millisecondes = 3 secondes
+      }, 3000); // 3000 millisecondes = 3 secondes pour l'envoi de la requête /start
     }
   }, [currentQuestionIndex, secondsLeft, showResponse, startSent]);
+  
 
   // Envoyer la requête à `/end` pour évaluer les réponses une fois le temps écoulé
 useEffect(() => {
@@ -186,6 +171,7 @@ useEffect(() => {
         reponses={currentQuestion.reponses}
         bonneReponse={currentQuestion.bonneReponse}
         showResponse={showResponse}
+        revealAnswers={revealAnswers}
       />
       
       </div>
