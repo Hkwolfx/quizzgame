@@ -38,7 +38,7 @@ export const questions: Question[] = [
     bonneReponse: "C",
   },
   {
-    question: "Qui est l'auteur de la série de livres 'Harry Potter'?",
+    question: "Qui est l'auteur des livres 'Harry Potter'?",
     reponses: { A: "réponse A -> J.K. Rowling", B: "réponse B -> Stephen King", C: "réponse C -> J.R.R. Tolkien", D: "réponse D -> George R.R. Martin" },
     bonneReponse: "A",
   },
@@ -63,12 +63,12 @@ export const questions: Question[] = [
     bonneReponse: "C",
   },
   {
-    question: "Quel est le livre le plus vendu au monde après la Bible?",
+    question: "Le livre le plus vendu au monde après la Bible?",
     reponses: { A: "réponse A -> Le Seigneur des Anneaux", B: "réponse B -> Le Petit Prince", C: "réponse C -> Harry Potter à l'école des sorciers", D: "réponse D -> Le Livre des Morts" },
     bonneReponse: "B",
   },
   {
-    question: "Quelle ville est surnommée 'La Ville des Lumières'?",
+    question: "Une ville surnommée 'La Ville des Lumières'?",
     reponses: { A: "réponse A -> New York", B: "réponse B -> Paris", C: "réponse C -> Tokyo", D: "réponse D -> Londres" },
     bonneReponse: "B",
   },
