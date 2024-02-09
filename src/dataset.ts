@@ -9,11 +9,11 @@ export interface Question {
 export const questions: Question[] = [
   {
     question: "Quelle est la capitale de la France?",
-    reponses: { a: "Lyon", b: "Marseille", c: "Paris", d: "Nice" },
-    bonneReponse: "c",
+    reponses: { a: " réponse A -> Lyon", b: "réponse B -> Marseille", c: "réponse C -> Paris", d: "réponse D -> Nice" },
+    bonneReponse: "C",
   },
   {
-    question: "Qui a écrit 1984?",
+    question: "Qui est l'auteur du livre 1984 ?",
     reponses: {
       a: "George Orwell",
       b: "Aldous Huxley",
@@ -23,17 +23,37 @@ export const questions: Question[] = [
     bonneReponse: "a",
   },
   {
-    question: "Quel est l'élément chimique de symbole 'O'?",
+    question: "Quel est le plus grand océan?",
+    reponses: { a: "Atlantique", b: "Indien", c: "Pacifique", d: "Arctique" },
+    bonneReponse: "c",
+  },
+  {
+    question: "Combien de planètes dans le système solaire?",
+    reponses: { a: "7", b: "8", c: "9", d: "10" },
+    bonneReponse: "b",
+  },
+  {
+    question: "Combien de continents dans le monde?",
+    reponses: { a: "4", b: "5", c: "6", d: "7" },
+    bonneReponse: "d",
+  },
+  {
+    question: "Capitale de la France?",
+    reponses: { a: "Lyon", b: "Marseille", c: "Paris", d: "Nice" },
+    bonneReponse: "c",
+  },
+  {
+    question: "Symbole chimique de l'Oxygène?",
     reponses: { a: "Or", b: "Osmium", c: "Oxygène", d: "Oganesson" },
     bonneReponse: "c",
   },
   {
-    question: "Dans quel pays se trouve la ville de Kyoto?",
+    question: "Kyoto est dans quel pays?",
     reponses: { a: "Chine", b: "Japon", c: "Corée du Sud", d: "Thaïlande" },
     bonneReponse: "b",
   },
   {
-    question: "Qui a peint La Nuit étoilée?",
+    question: "Peintre de La Nuit étoilée?",
     reponses: {
       a: "Pablo Picasso",
       b: "Leonardo Da Vinci",
@@ -43,474 +63,309 @@ export const questions: Question[] = [
     bonneReponse: "c",
   },
   {
-    question: "L'eau bout à 100 degrés Celsius.",
+    question: "L'eau bout à quel degré?",
     reponses: { a: "Vrai", b: "Faux" },
     bonneReponse: "a",
   },
   {
-    question: "Le soleil tourne autour de la Terre.",
-    reponses: { a: "Vrai", b: "Faux" },
-    bonneReponse: "b",
-  },
-  {
-    question: "Le cheval blanc d'Henri IV est blanc.",
-    reponses: { a: "Vrai", b: "Faux" },
-    bonneReponse: "a",
-  },
-  {
-    question: "Le son va plus vite dans l'air.",
-    reponses: { a: "Vrai", b: "Faux" },
-    bonneReponse: "b",
-  },
-  {
-    question: "les UV traversent les nuages.",
-    reponses: { a: "Vrai", b: "Faux" },
-    bonneReponse: "a",
-  },
-  {
-    question: "Créateur de Unus Annus?",
+    question: "Quel est le plus long fleuve du monde ?",
     reponses: {
-      a: "Mark & Ethan",
-      b: "Jake & Logan",
-      c: "Dan & Phil",
-      d: "Rhett & Link",
+      a: "Le Nil",
+      b: "L'Amazone",
+      c: "Le Yangtsé",
+      d: "Le Mississippi"
     },
-    bonneReponse: "a",
+    bonneReponse: "b"
   },
   {
-    question: "Origine du Renegade sur TikTok?",
+    question: "Qui a inventé l'ampoule électrique ?",
     reponses: {
-      a: "Addison Rae",
-      b: "Charli D'Amelio",
-      c: "Jalaiah Harmon",
-      d: "Bella Poarch",
+      a: "Nikola Tesla",
+      b: "Thomas Edison",
+      c: "Alexander Graham Bell",
+      d: "Albert Einstein"
     },
-    bonneReponse: "c",
+    bonneReponse: "b"
   },
   {
-    question: "Gourou de Minecraft sur Twitch?",
-    reponses: { a: "Ninja", b: "Pokimane", c: "TommyInnit", d: "Shroud" },
-    bonneReponse: "c",
-  },
-  {
-    question: "Fondateur du Dream SMP?",
-    reponses: { a: "Dream", b: "George", c: "Sapnap", d: "Wilbur Soot" },
-    bonneReponse: "a",
-  },
-  {
-    question: "Précurseur de la dance Renegade?",
+    question: "Quelle planète est connue comme la 'Planète Rouge' ?",
     reponses: {
-      a: "Jalaiah Harmon",
-      b: "Charli D'Amelio",
-      c: "Addison Rae",
-      d: "Bella Poarch",
+      a: "Mars",
+      b: "Vénus",
+      c: "Jupiter",
+      d: "Saturne"
     },
-    bonneReponse: "a",
+    bonneReponse: "a"
   },
   {
-    question: "Animateur de Meme Review?",
+    question: "Dans quel pays se trouve la ville de Venise ?",
     reponses: {
-      a: "PewDiePie",
-      b: "Jacksepticeye",
-      c: "Markiplier",
-      d: "MrBeast",
+      a: "France",
+      b: "Espagne",
+      c: "Italie",
+      d: "Portugal"
     },
-    bonneReponse: "a",
+    bonneReponse: "c"
   },
   {
-    question: "Popularisateur de Among Us?",
+    question: "Qui est l'auteur de 'La Joconde' ?",
     reponses: {
-      a: "xQc",
-      b: "Disguised Toast",
-      c: "Pokimane",
-      d: "Corpse Husband",
+      a: "Vincent Van Gogh",
+      b: "Pablo Picasso",
+      c: "Leonardo da Vinci",
+      d: "Claude Monet"
     },
-    bonneReponse: "b",
+    bonneReponse: "c"
   },
   {
-    question: "Auteur de Everyday Bro?",
+    question: "Quel est l'élément chimique avec le symbole 'H' ?",
     reponses: {
-      a: "Logan Paul",
-      b: "Jake Paul",
-      c: "David Dobrik",
-      d: "Casey Neistat",
+      a: "Oxygène",
+      b: "Hydrogène",
+      c: "Hélium",
+      d: "Azote"
     },
-    bonneReponse: "b",
+    bonneReponse: "b"
   },
   {
-    question: "Qui commence par ses lives Hi Sisters?",
+    question: "Quelle est la capitale du Canada ?",
     reponses: {
-      a: "James Charles",
-      b: "Jeffree Star",
-      c: "Nikita Dragun",
-      d: "Tati Westbrook",
+      a: "Toronto",
+      b: "Montreal",
+      c: "Vancouver",
+      d: "Ottawa"
     },
-    bonneReponse: "a",
+    bonneReponse: "d"
   },
   {
-    question: "Pionnier de la Cradles dance sur TikTok?",
+    question: "Qui a composé les Quatre Saisons ?",
     reponses: {
-      a: "Tony Lopez",
-      b: "Michael Le",
-      c: "Spencer Knight",
-      d: "Rod Contreras",
+      a: "Ludwig van Beethoven",
+      b: "Antonio Vivaldi",
+      c: "Johann Sebastian Bach",
+      d: "Wolfgang Amadeus Mozart"
     },
-    bonneReponse: "b",
+    bonneReponse: "b"
   },
   {
-    question: "Inventeur du 'Dab'?",
-    reponses: { a: "Logan Paul", b: "PewDiePie", c: "Squeezie", d: "Migos" },
-    bonneReponse: "d",
-  },
-  {
-    question: "Star de TikTok et boxeur?",
-    reponses: { a: "Jake Paul", b: "KSI", c: "Logan Paul", d: "AnEsonGib" },
-    bonneReponse: "c",
-  },
-  {
-    question: "‘Roi du YouTube français’?",
-    reponses: { a: "Cyprien", b: "Norman", c: "Squeezie", d: "Amixem" },
-    bonneReponse: "c",
-  },
-  {
-    question: "Streamer célèbre pour ses raids sur Twitch?",
-    reponses: { a: "xQc", b: "Zerator", c: "Sardoche", d: "TheGrefg" },
-    bonneReponse: "b",
-  },
-  {
-    question: "TikTokeuse connue pour ses danses?",
+    question: "Quel pays a pour capitale Berlin ?",
     reponses: {
-      a: "Addison Rae",
-      b: "Charli D'Amelio",
-      c: "Dixie D'Amelio",
-      d: "Loren Gray",
+      a: "France",
+      b: "Allemagne",
+      c: "Autriche",
+      d: "Belgique"
     },
-    bonneReponse: "b",
+    bonneReponse: "b"
   },
   {
-    question: "YouTubeur spécialiste en survivalisme?",
+    question: "Quelle est la plus grande planète du système solaire ?",
     reponses: {
-      a: "Fritz Meinecke",
-      b: "Primitive Technology",
-      c: "Survival Lilly",
-      d: "My Self Reliance",
+      a: "Saturne",
+      b: "Jupiter",
+      c: "Mars",
+      d: "Terre"
     },
-    bonneReponse: "b",
+    bonneReponse: "b"
   },
   {
-    question: "Qui a popularisé le terme 'E-boy'?",
+    question: "Quelle est la capitale du Canada ?",
     reponses: {
-      a: "Chase Hudson",
-      b: "Noen Eubanks",
-      c: "Jacob Sartorius",
-      d: "Cameron Dallas",
+      a: "Toronto",
+      b: "Montreal",
+      c: "Vancouver",
+      d: "Ottawa"
     },
-    bonneReponse: "a",
+    bonneReponse: "d"
   },
   {
-    question: "Première 'YouTubeuse' beauté française?",
-    reponses: { a: "EnjoyPhoenix", b: "Sananas", c: "Horia", d: "Natoo" },
-    bonneReponse: "a",
-  },
-  {
-    question: "Créateur de 'Salut les geeks'?",
+    question: "Qui a composé les Quatre Saisons ?",
     reponses: {
-      a: "MisterJDay",
-      b: "Joueur Du Grenier",
-      c: "Mathieu Sommet",
-      d: "Antoine Daniel",
+      a: "Ludwig van Beethoven",
+      b: "Antonio Vivaldi",
+      c: "Johann Sebastian Bach",
+      d: "Wolfgang Amadeus Mozart"
     },
-    bonneReponse: "c",
+    bonneReponse: "b"
   },
   {
-    question: "Phénomène musical découvert sur YouTube?",
+    question: "Quel pays a pour capitale Berlin ?",
     reponses: {
-      a: "Justin Bieber",
-      b: "Billie Eilish",
-      c: "Shawn Mendes",
-      d: "Lil Nas X",
+      a: "France",
+      b: "Allemagne",
+      c: "Autriche",
+      d: "Belgique"
     },
-    bonneReponse: "a",
+    bonneReponse: "b"
   },
   {
-    question: "Qui a lancé le 'Hot Ones'?",
+    question: "Quelle est la plus grande planète du système solaire ?",
     reponses: {
-      a: "Sean Evans",
-      b: "Gordon Ramsay",
-      c: "Jamie Oliver",
-      d: "Guy Fieri",
+      a: "Saturne",
+      b: "Jupiter",
+      c: "Mars",
+      d: "Terre"
     },
-    bonneReponse: "a",
+    bonneReponse: "b"
   },
   {
-    question: "Pionnier du 'Let's Play' sur YouTube?",
+    question: "Quel pays est connu comme le pays du Soleil-Levant ?",
     reponses: {
-      a: "Markiplier",
-      b: "PewDiePie",
-      c: "Jacksepticeye",
-      d: "TheRadBrad",
+      a: "Inde",
+      b: "Égypte",
+      c: "Japon",
+      d: "Australie"
     },
-    bonneReponse: "b",
+    bonneReponse: "c"
   },
   {
-    question: "Star de TikTok pour ses lip-syncs?",
+    question: "Qui a écrit 'L'Ingénu' ?",
     reponses: {
-      a: "Loren Gray",
-      b: "Bella Poarch",
-      c: "Charli D'Amelio",
-      d: "Zach King",
+      a: "Voltaire",
+      b: "Molière",
+      c: "Victor Hugo",
+      d: "Émile Zola"
     },
-    bonneReponse: "b",
+    bonneReponse: "a"
   },
   {
-    question: "Innovateur de vlogs sur YouTube?",
+    question: "Dans quelle ville peut-on visiter la Tour Eiffel ?",
     reponses: {
-      a: "Casey Neistat",
-      b: "David Dobrik",
-      c: "Logan Paul",
-      d: "PewDiePie",
+      a: "Londres",
+      b: "Berlin",
+      c: "Paris",
+      d: "Bruxelles"
     },
-    bonneReponse: "a",
+    bonneReponse: "c"
   },
   {
-    question: "Champion de 'Fortnite' sur Twitch?",
-    reponses: { a: "Ninja", b: "Tfue", c: "Bugha", d: "Myth" },
-    bonneReponse: "c",
-  },
-  {
-    question: "TikTok pour défis de danse?",
+    question: "Quel est le plus long fleuve du monde ?",
     reponses: {
-      a: "Addison Rae",
-      b: "Charli D'Amelio",
-      c: "Dixie D'Amelio",
-      d: "Les Twins",
+      a: "Nil",
+      b: "Amazone",
+      c: "Yangtsé",
+      d: "Mississippi"
     },
-    bonneReponse: "b",
+    bonneReponse: "b"
   },
   {
-    question: "Analyse de films sur YouTube?",
+    question: "Quel compositeur est célèbre pour la 'Lettre à Élise' ?",
     reponses: {
-      a: "CinemaSins",
-      b: "Screen Junkies",
-      c: "MrBeast",
-      d: "Nerdwriter1",
+      a: "Frédéric Chopin",
+      b: "Ludwig van Beethoven",
+      c: "Wolfgang Amadeus Mozart",
+      d: "Johann Sebastian Bach"
     },
-    bonneReponse: "d",
+    bonneReponse: "b"
   },
   {
-    question: "Expert en 'speedrun' sur YouTube?",
-    reponses: { a: "Dream", b: "Karl Jobst", c: "Cheese", d: "Summoning Salt" },
-    bonneReponse: "d",
-  },
-  {
-    question: "YouTube pour critiques tech?",
+    question: "Qui a peint 'La Nuit étoilée' ?",
     reponses: {
-      a: "Linus Tech Tips",
-      b: "Marques Brownlee",
-      c: "Unbox Therapy",
-      d: "Dave Lee",
+      a: "Pablo Picasso",
+      b: "Leonardo da Vinci",
+      c: "Vincent van Gogh",
+      d: "Claude Monet"
     },
-    bonneReponse: "b",
+    bonneReponse: "c"
   },
   {
-    question: "Streamer Twitch osée pour 'Just Chatting'?",
-    reponses: { a: "Pokimane", b: "xQc", c: "Amouranth", d: "Ludwig" },
-    bonneReponse: "c",
-  },
-  {
-    question: "Qui anime 'Last Week Tonight'?",
+    question: "Quel est l'océan le plus profond du monde ?",
     reponses: {
-      a: "John Oliver",
-      b: "Stephen Colbert",
-      c: "Trevor Noah",
-      d: "Jimmy Fallon",
+      a: "Océan Atlantique",
+      b: "Océan Indien",
+      c: "Océan Arctique",
+      d: "Océan Pacifique"
     },
-    bonneReponse: "a",
+    bonneReponse: "d"
   },
   {
-    question: "Créateur de contenu VR célèbre?",
+    question: "Quelle structure est considérée comme la plus ancienne des sept merveilles du monde ?",
     reponses: {
-      a: "Jacksepticeye",
-      b: "Nathie",
-      c: "PewDiePie",
-      d: "Markiplier",
+      a: "La Statue de Zeus à Olympie",
+      b: "Le Colosse de Rhodes",
+      c: "La Grande Pyramide de Gizeh",
+      d: "Le Phare d'Alexandrie"
     },
-    bonneReponse: "b",
+    bonneReponse: "c"
   },
   {
-    question: "Influenceuse mode sur TikTok?",
+    question: "Quel dirigeant est connu pour avoir été le fondateur de l'Empire mongol ?",
     reponses: {
-      a: "Emma Chamberlain",
-      b: "Addison Rae",
-      c: "Wisdom Kaye",
-      d: "Charli D'Amelio",
+      a: "Gengis Khan",
+      b: "Kubilai Khan",
+      c: "Tamerlan",
+      d: "Attila"
     },
-    bonneReponse: "c",
+    bonneReponse: "a"
   },
   {
-    question: "YouTubeur spécialisé en science?",
+    question: "Quelle est la capitale de la Nouvelle-Zélande ?",
     reponses: {
-      a: "Vsauce",
-      b: "Mark Rober",
-      c: "AsapSCIENCE",
-      d: "SmarterEveryDay",
+      a: "Auckland",
+      b: "Christchurch",
+      c: "Wellington",
+      d: "Hamilton"
     },
-    bonneReponse: "a",
+    bonneReponse: "c"
   },
   {
-    question: "Streamer Twitch le plus fort de League of Legends?",
-    reponses: { a: "Tyler1", b: "Faker", c: "Sneaky", d: "Doublelift" },
-    bonneReponse: "b",
-  },
-  {
-    question: "Commentateur politique sur YouTube?",
+    question: "Qui a écrit 'À la recherche du temps perdu' ?",
     reponses: {
-      a: "Philip DeFranco",
-      b: "Steven Crowder",
-      c: "Kyle Kulinski",
-      d: "Ben Shapiro",
+      a: "Marcel Proust",
+      b: "Victor Hugo",
+      c: "Gustave Flaubert",
+      d: "Honoré de Balzac"
     },
-    bonneReponse: "c",
+    bonneReponse: "a"
   },
   {
-    question: "Qui a popularisé 'Ok Boomer' sur TikTok?",
+    question: "Quel élément a pour numéro atomique 79 ?",
     reponses: {
-      a: "Neekolul",
-      b: "Bella Poarch",
-      c: "Brittany Broski",
-      d: "Dixie D'Amelio",
+      a: "Fer",
+      b: "Or",
+      c: "Argent",
+      d: "Plomb"
     },
-    bonneReponse: "a",
+    bonneReponse: "b"
   },
   {
-    question: "Streamer spécialisé en 'Minecraft Hardcore'?",
+    question: "Quelle ville est surnommée 'La Ville Lumière' ?",
     reponses: {
-      a: "Philza",
-      b: "Dream",
-      c: "Technoblade",
-      d: "GeorgeNotFound",
+      a: "New York",
+      b: "Paris",
+      c: "Londres",
+      d: "Tokyo"
     },
-    bonneReponse: "a",
+    bonneReponse: "b"
   },
   {
-    question: "Expert en 'life hacks' sur YouTube?",
+    question: "Qui est considéré comme le père de l'informatique ?",
     reponses: {
-      a: "5-Minute Crafts",
-      b: "Troom Troom",
-      c: "MrGear",
-      d: "CrazyRussianHacker",
+      a: "Charles Babbage",
+      b: "Alan Turing",
+      c: "Bill Gates",
+      d: "Steve Jobs"
     },
-    bonneReponse: "d",
+    bonneReponse: "a"
   },
   {
-    question: "TikTokeur connu pour ses illusions?",
+    question: "Quel est le plus grand animal terrestre ?",
     reponses: {
-      a: "Zach King",
-      b: "Kevin Parry",
-      c: "Johannes Bartl",
-      d: "Julius Dein",
+      a: "Le rhinocéros blanc",
+      b: "L'éléphant d'Afrique",
+      c: "Le gorille",
+      d: "Le tigre de Sibérie"
     },
-    bonneReponse: "a",
+    bonneReponse: "b"
   },
   {
-    question: "Reine du 'cleaning' sur TikTok?",
+    question: "Dans quel pays se trouve le Taj Mahal ?",
     reponses: {
-      a: "Mrs Hinch",
-      b: "Marie Kondo",
-      c: "Vanessa Amaro",
-      d: "Sophie Hinchliffe",
+      a: "Inde",
+      b: "Pakistan",
+      c: "Bangladesh",
+      d: "Népal"
     },
-    bonneReponse: "d",
-  },
-  {
-    question: "Expert en survie sur YouTube?",
-    reponses: {
-      a: "Bear Grylls",
-      b: "Survival Russia",
-      c: "Joe Robinet",
-      d: "Cody Lundin",
-    },
-    bonneReponse: "c",
-  },
-  {
-    question: "TikTokeur célèbre pour ses voix off?",
-    reponses: {
-      a: "Chris Collins",
-      b: "Brock Baker",
-      c: "Spencewuah",
-      d: "Charlie D'Amelio",
-    },
-    bonneReponse: "b",
-  },
-  {
-    question: "YouTubeur voyageur en van?",
-    reponses: {
-      a: "Eamon & Bec",
-      b: "Max & Lee",
-      c: "Jinti Fell",
-      d: "Kombi Life",
-    },
-    bonneReponse: "a",
-  },
-  {
-    question: "YouTube pour DIY et bricolage?",
-    reponses: {
-      a: "DIY Perks",
-      b: "The Q",
-      c: "I Like To Make Stuff",
-      d: "LaurDIY",
-    },
-    bonneReponse: "c",
-  },
-  {
-    question: "Gourou de fitness sur YouTube?",
-    reponses: {
-      a: "Chloe Ting",
-      b: "Pamela Reif",
-      c: "Jeff Nippard",
-      d: "Jeremy Ethier",
-    },
-    bonneReponse: "a",
-  },
-  {
-    question: "Star TikTok pour conseils financiers?",
-    reponses: {
-      a: "Graham Stephan",
-      b: "Andrei Jikh",
-      c: "Nate O'Brien",
-      d: "Erika Kullberg",
-    },
-    bonneReponse: "a",
-  },
-  {
-    question: "Cuisinier célèbre sur Twitch?",
-    reponses: {
-      a: "Joshua Weissman",
-      b: "Binging with Babish",
-      c: "Rosanna Pansino",
-      d: "TheHungerService",
-    },
-    bonneReponse: "d",
-  },
-  {
-    question: "YouTubeur pour critiques de cinéma?",
-    reponses: {
-      a: "Chris Stuckmann",
-      b: "Jeremy Jahns",
-      c: "CinemaSins",
-      d: "RedLetterMedia",
-    },
-    bonneReponse: "a",
-  },
-  {
-    question: "TikTokeur pour sketchs humoristiques?",
-    reponses: {
-      a: "Brent Rivera",
-      b: "King Bach",
-      c: "Zach King",
-      d: "Sarah Cooper",
-    },
-    bonneReponse: "b",
-  },
+    bonneReponse: "a"
+  }
   // Ajoutez d'autres questions ici
 ];

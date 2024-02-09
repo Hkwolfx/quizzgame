@@ -69,7 +69,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
         <table
           style={{
             // marginLeft: "13rem",
-            width: "100%",
+            width: "133%",
             textTransform: "uppercase",
             fontWeight: "bold",
             borderCollapse: "collapse",

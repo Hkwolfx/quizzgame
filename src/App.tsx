@@ -71,14 +71,16 @@ const App = () => {
             const updatedScores: Joueur[] = data.meilleursJoueurs.map((joueurFromServer: Joueur) => {
               const existingPlayerIndex = prevMeilleursJoueurs.findIndex(j => j.userId === joueurFromServer.userId);
               if (existingPlayerIndex !== -1) {
-                const updatedPlayer: Joueur = {
-                  ...prevMeilleursJoueurs[existingPlayerIndex],
-                  score: prevMeilleursJoueurs[existingPlayerIndex].score + joueurFromServer.score,
-                };
-                return updatedPlayer;
-              } else {
-                return joueurFromServer;
+                const existingPlayer = prevMeilleursJoueurs[existingPlayerIndex];
+                if (joueurFromServer.score > existingPlayer.score) {
+                  const updatedPlayer: Joueur = {
+                    ...existingPlayer,
+                    score: joueurFromServer.score,
+                  };
+                  return updatedPlayer;
+                }
               }
+              return joueurFromServer;
             });
   
             const filteredExistingPlayers = prevMeilleursJoueurs.filter(
