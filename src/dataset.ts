@@ -126,6 +126,102 @@ export const questions: Question[] = [
     question: "Quel film a remporté l'Oscar du meilleur film en 1994?",
     reponses: { A: "réponse A -> Pulp Fiction", B: "réponse B -> Forrest Gump", C: "réponse C -> Le Roi Lion", D: "réponse D -> Shawshank Redemption" },
     bonneReponse: "B",
+  },
+  
+{
+    question: "Qui a fondé la compagnie Apple?",
+    reponses: { A: "réponse A -> Bill Gates et Paul Allen", B: "réponse B -> Steve Jobs et Steve Wozniak", C: "réponse C -> Larry Page et Sergey Brin", D: "réponse D -> Mark Zuckerberg" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Quel océan borde la côte ouest des États-Unis?",
+    reponses: { A: "réponse A -> Océan Atlantique", B: "réponse B -> Océan Indien", C: "réponse C -> Océan Arctique", D: "réponse D -> Océan Pacifique" },
+    bonneReponse: "D",
+  },
+  {
+    question: "Quelle est la durée d'un match de football (sans prolongations)?",
+    reponses: { A: "réponse A -> 60 minutes", B: "réponse B -> 90 minutes", C: "réponse C -> 80 minutes", D: "réponse D -> 100 minutes" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Quel est l'élément chimique le plus abondant dans l'univers?",
+    reponses: { A: "réponse A -> Oxygène", B: "réponse B -> Hydrogène", C: "réponse C -> Carbone", D: "réponse D -> Fer" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Dans quelle ville se trouve la statue de la Liberté?",
+    reponses: { A: "réponse A -> Boston", B: "réponse B -> Philadelphia", C: "réponse C -> New York", D: "réponse D -> Washington D.C." },
+    bonneReponse: "C",
+  },
+  {
+    question: "Quelle série télévisée a créé le personnage de Walter White?",
+    reponses: { A: "réponse A -> Game of Thrones", B: "réponse B -> Breaking Bad", C: "réponse C -> Mad Men", D: "réponse D -> The Wire" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Qui a gagné le premier prix Nobel de la paix?",
+    reponses: { A: "réponse A -> Albert Schweitzer", B: "réponse B -> Henry Dunant", C: "réponse C -> Martin Luther King Jr.", D: "réponse D -> Mother Teresa" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Quel pays est le plus peuplé du monde?",
+    reponses: { A: "réponse A -> États-Unis", B: "réponse B -> Inde", C: "réponse C -> Chine", D: "réponse D -> Indonésie" },
+    bonneReponse: "C",
+  },
+  {
+    question: "Quel est le plus haut sommet du monde?",
+    reponses: { A: "réponse A -> K2", B: "réponse B -> Mont Everest", C: "réponse C -> Mont Kilimandjaro", D: "réponse D -> Mont Blanc" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Quelle est la plus longue rivière de France?",
+    reponses: { A: "réponse A -> La Loire", B: "réponse B -> La Seine", C: "réponse C -> Le Rhône", D: "réponse D -> La Garonne" },
+    bonneReponse: "A",
+  },
+  {
+    question: "Qui était le roi soleil ?",
+    reponses: { A: "réponse A -> Henri IV", B: "réponse B -> François Ier", C: "réponse C -> Louis XIV", D: "réponse D -> Charles de Gaulle" },
+    bonneReponse: "C",
+  },
+  {
+    question: "Quelle est la spécialité culinaire de la ville de Lyon ?",
+    reponses: { A: "réponse A -> La bouillabaisse", B: "réponse B -> Le cassoulet", C: "réponse C -> La quenelle", D: "réponse D -> Le coq au vin" },
+    bonneReponse: "C",
+  },
+  {
+    question: "Quel musée français abrite la Joconde ?",
+    reponses: { A: "réponse A -> Le musée d'Orsay", B: "réponse B -> Le Louvre", C: "réponse C -> Le Centre Pompidou", D: "réponse D -> Le musée Rodin" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Dans quelle région se trouve le Mont Saint-Michel ?",
+    reponses: { A: "réponse A -> Normandie", B: "réponse B -> Bretagne", C: "réponse C -> Pays de la Loire", D: "réponse D -> Nouvelle-Aquitaine" },
+    bonneReponse: "A",
+  },
+  {
+    question: "Quelle ville est surnommée la capitale des Gaules ?",
+    reponses: { A: "réponse A -> Marseille", B: "réponse B -> Lyon", C: "réponse C -> Paris", D: "réponse D -> Lille" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Quelle est la date de la prise de la Bastille, marquant le début de la Révolution Française ?",
+    reponses: { A: "réponse A -> 14 juillet 1789", B: "réponse B -> 5 mai 1789", C: "réponse C -> 26 août 1789", D: "réponse D -> 9 novembre 1799" },
+    bonneReponse: "A",
+  },
+  {
+    question: "Qui a écrit 'Les Misérables' ?",
+    reponses: { A: "réponse A -> Émile Zola", B: "réponse B -> Victor Hugo", C: "réponse C -> Alexandre Dumas", D: "réponse D -> Gustave Flaubert" },
+    bonneReponse: "B",
+  },
+  {
+    question: "Quelle est la plus haute montagne de France ?",
+    reponses: { A: "réponse A -> Le Mont Blanc", B: "réponse B -> Le Pic du Midi", C: "réponse C -> Le Mont Ventoux", D: "réponse D -> Le Puy de Dôme" },
+    bonneReponse: "A",
+  },
+  {
+    question: "Quel festival de cinéma se déroule annuellement sur la Côte d'Azur ?",
+    reponses: { A: "réponse A -> Le Festival de Cannes", B: "réponse B -> La Berlinale", C: "réponse C -> Le Festival de Venise", D: "réponse D -> Le Sundance Film Festival" },
+    bonneReponse: "A",
   }
-  // Ajoutez d'autres questions ici
+   // Ajoutez d'autres questions ici
 ];
