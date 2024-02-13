@@ -101,7 +101,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
                 className="name"
                 style={{ textAlign: "left", fontSize: "1.2rem" }}
               >
-                {joueur.uniqueId}
+                {joueur.nickname}
               </td>
               <td
                 className="points"

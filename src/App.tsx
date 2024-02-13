@@ -148,6 +148,7 @@ useEffect(() => {
 
   const currentQuestion: Question = questions[currentQuestionIndex];
 
+
   return (
     <div className="App">
       <div className="cube-handle">
