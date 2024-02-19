@@ -12,6 +12,7 @@ interface Joueur {
   userId: string;
   uniqueId: string;
   score: number;
+  profilePictureUrl?: string;
 }
 
 

@@ -2,6 +2,8 @@ import React from "react";
 import { FaShare } from "react-icons/fa";
 import "./Ranking.css";
 
+
+
 const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
   return (
     <main
@@ -101,6 +103,11 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
                 className="name"
                 style={{ textAlign: "left", fontSize: "1.2rem" }}
               >
+                 <img
+                  src={joueur.profilePictureUrl || "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/edd12aab059d878ba5ca47a380016436~c5_100x100.webp?lk3s=a5d48078&x-expires=1708516800&x-signature=pKfnUMAfKukSqhUCa7PAgvIPdIg%3D" }
+                  alt="Profile"
+                  style={{ height: "2rem", marginRight: "0.5rem", borderRadius: "50%" }} // Ajustez selon votre design
+                />
                 {joueur.nickname}
               </td>
               <td
@@ -130,5 +137,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
     </main>
   );
 };
+
+
 
 export default Ranking;
