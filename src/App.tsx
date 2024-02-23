@@ -83,50 +83,35 @@ const App = () => {
   }, [currentQuestionIndex, secondsLeft, showResponse, startSent]);
   
 
-  // Envoyer la requête à `/end` pour évaluer les réponses une fois le temps écoulé
-useEffect(() => {
-  if (showResponse) { // Se déclenche uniquement à la fin du temps alloué pour répondre
-    const bonneReponseData = {
-      bonneReponse: questions[currentQuestionIndex].bonneReponse,
-    };
-
-    fetch('http://localhost:3000/end', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(bonneReponseData),
-    })
-    .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
-    .then(data => {
-      // setMeilleursJoueurs(data.meilleursJoueurs); // Mise à jour du classement avec les données reçues
-        setMeilleursJoueurs((prevMeilleursJoueurs: Joueur[]) => {
-            const updatedScores: Joueur[] = data.meilleursJoueurs.map((joueurFromServer: Joueur) => {
-              const existingPlayerIndex = prevMeilleursJoueurs.findIndex(j => j.userId === joueurFromServer.userId);
-              if (existingPlayerIndex !== -1) {
-                const existingPlayer = prevMeilleursJoueurs[existingPlayerIndex];
-                if (joueurFromServer.score > existingPlayer.score) {
-                  const updatedPlayer: Joueur = {
-                    ...existingPlayer,
-                    score: joueurFromServer.score,
-                  };
-                  return updatedPlayer;
-                }
-              }
-              return joueurFromServer;
-            });
+  useEffect(() => {
+    if (showResponse) {
+      fetch('http://localhost:3000/end', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ bonneReponse: questions[currentQuestionIndex].bonneReponse }),
+      })
+      .then(response => response.ok ? response.json() : Promise.reject('Erreur réseau'))
+      .then(data => {
+        setMeilleursJoueurs(prevMeilleursJoueurs => {
+          const updatedScoresMap = new Map();
   
-            const filteredExistingPlayers = prevMeilleursJoueurs.filter(
-              joueurPrev => !updatedScores.some(joueurUpdated => joueurUpdated.userId === joueurPrev.userId)
-            );
-  
-            return [...filteredExistingPlayers, ...updatedScores].sort((a, b) => b.score - a.score);
+          data.meilleursJoueurs.forEach((joueurFromServer: { userId: any; }) => {
+            updatedScoresMap.set(joueurFromServer.userId, joueurFromServer);
           });
   
-          console.log('Mise à jour des meilleurs joueurs avec les nouveaux scores.');
-      console.log('Classement mis à jour avec les nouveaux meilleurs joueurs.');
-    })
-    .catch(error => console.error('Erreur lors de la requête /end:', error));
-  }
-}, [showResponse, currentQuestionIndex]);
+          const mergedScores = prevMeilleursJoueurs.map(joueur => updatedScoresMap.get(joueur.userId) || joueur);
+          const uniqueMergedScores = Array.from(new Set([...mergedScores, ...data.meilleursJoueurs]));
+          
+          return uniqueMergedScores
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 3); // Assurez-vous de ne garder que les trois meilleurs joueurs
+        });
+  
+        console.log('Mise à jour des meilleurs joueurs avec les nouveaux scores.');
+      })
+      .catch(error => console.error('Erreur lors de la requête /end:', error));
+    }
+  }, [showResponse, currentQuestionIndex, questions]);
 
 
   
