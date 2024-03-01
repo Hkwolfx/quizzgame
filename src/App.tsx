@@ -27,6 +27,7 @@ const App = () => {
   const [revealAnswers, setRevealAnswers] = useState(false); // Cet état contrôle l'affichage des options de réponse
   const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
   const [meilleursJoueurs, setMeilleursJoueurs] = useState<Joueur[]>([]);
+  const [utilisateursNotifies, setUtilisateursNotifies] = useState([]);
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
@@ -134,14 +135,36 @@ const App = () => {
 
   const currentQuestion: Question = questions[currentQuestionIndex];
 
+  const fetchUtilisateursNotifies = () => {
+    fetch('http://localhost:3000/likes-notifies')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+          console.log("Données des likes récupérées")
+        }
+        throw new Error('Réseau ou erreur de réponse');
+      })
+      .then(data => setUtilisateursNotifies(data))
+      .catch(error => console.error('Erreur lors de la récupération des utilisateurs notifiés:', error));
+  };
+
+  useEffect(() => {
+    fetchUtilisateursNotifies();
+  }, [currentQuestionIndex, questions, showResponse]); // Le tableau vide signifie que cela ne s'exécutera qu'une fois, après le premier rendu
+  // sinon il faut mettre les états qu'on veut surveiller pour déclencher un useEffect.
+  
 
   return (
     <div className="App">
       <div className="cube-handle">
+      <div className="thank-you-messages">
+        {utilisateursNotifies.map((user: { userId: string; nickname: string; likeCount: number }) => (
+          <div key={user.userId}>
+            Merci, {user.nickname} pour les {user.likeCount} likes!
+          </div>
+        ))}
+        </div>
       </div>
-
-
-
       {isPlaying ? (
         <button className="pause-button" onClick={handlePauseClick}>
           <FaPause size={30} />
@@ -160,6 +183,7 @@ const App = () => {
         showResponse={showResponse}
         revealAnswers={revealAnswers}
       />
+      
       
       </div>
       <Ranking meilleursJoueurs={meilleursJoueurs} />
