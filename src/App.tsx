@@ -28,6 +28,8 @@ const App = () => {
   const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
   const [meilleursJoueurs, setMeilleursJoueurs] = useState<Joueur[]>([]);
   const [utilisateursNotifies, setUtilisateursNotifies] = useState([]);
+  const [currentUserIndex, setCurrentUserIndex] = useState(0);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
@@ -150,21 +152,30 @@ const App = () => {
 
   useEffect(() => {
     fetchUtilisateursNotifies();
-  }, [currentQuestionIndex, questions, showResponse]); // Le tableau vide signifie que cela ne s'exécutera qu'une fois, après le premier rendu
+  }, [currentQuestionIndex]); // Le tableau vide signifie que cela ne s'exécutera qu'une fois, après le premier rendu
   // sinon il faut mettre les états qu'on veut surveiller pour déclencher un useEffect.
+
+  useEffect(() => {
+    // On affiche un utilisateur si il y en a dans la liste et que l'index courant est inférieur à la longueur de la liste
+    if (utilisateursNotifies.length > 0 && currentUserIndex < utilisateursNotifies.length) {
+      setShowThankYou(true);
+      const timer = setTimeout(() => {
+        setShowThankYou(false);
+        // On s'assure de ne pas dépasser la longueur de la liste
+        if (currentUserIndex < utilisateursNotifies.length - 1) {
+          setCurrentUserIndex(currentUserIndex + 1);
+        }
+      }, 5000); // Changer l'utilisateur après 5 secondes
+      return () => clearTimeout(timer);
+    } else {
+      // On cache le message si tous ont été affichés
+      setShowThankYou(false);
+    }
+  }, [currentUserIndex, utilisateursNotifies]);
   
 
   return (
     <div className="App">
-      <div className="cube-handle">
-      <div className="thank-you-messages">
-        {utilisateursNotifies.map((user: { userId: string; nickname: string; likeCount: number }) => (
-          <div key={user.userId}>
-            Merci, {user.nickname} pour les {user.likeCount} likes!
-          </div>
-        ))}
-        </div>
-      </div>
       {isPlaying ? (
         <button className="pause-button" onClick={handlePauseClick}>
           <FaPause size={30} />
@@ -174,17 +185,25 @@ const App = () => {
           <FaPlay size={30} />
         </button>
       )}
+       {showThankYou && currentUserIndex < utilisateursNotifies.length && (
+    <div className="thank-you-messages">
+      <div className="star star1">★</div>
+      <div className="star star2">★</div>
+      <div className="star star3">★</div>
+      <div className="star star4">★</div>
+      <div>
+        Merci, {(utilisateursNotifies[currentUserIndex] as any).nickname} pour les {(utilisateursNotifies[currentUserIndex] as any).likeCount} likes !
+      </div>
+    </div>
+  )}
       <div style={{ visibility: isCardVisible ? "visible" : "hidden" }} >
       <Card
-          
         question={currentQuestion.question}
         reponses={currentQuestion.reponses}
         bonneReponse={currentQuestion.bonneReponse}
         showResponse={showResponse}
         revealAnswers={revealAnswers}
       />
-      
-      
       </div>
       <Ranking meilleursJoueurs={meilleursJoueurs} />
       {!showResponse && <ProgressBar value={secondsLeft} maxValue={10} />}
