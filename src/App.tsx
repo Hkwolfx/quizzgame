@@ -8,11 +8,22 @@ import "./App.css";
 // import { initializeDragAndDrop } from "./_dragnDrop";
 import Ranking from "./components/Ranking";
 
+// typages
+
 interface Joueur {
   userId: string;
   uniqueId: string;
   score: number;
   profilePictureUrl?: string;
+}
+
+interface Notification {
+  userId: string;
+  nickname: string;
+  likeCount?: number; // pour les likes
+  action?: string; // pour les actions sociales
+  giftId?: string; // pour les cadeaux
+  type: 'like' | 'social' | 'gift'; // distingue le type de notification
 }
 
 
@@ -27,7 +38,7 @@ const App = () => {
   const [revealAnswers, setRevealAnswers] = useState(false); // Cet état contrôle l'affichage des options de réponse
   const [startSent, setStartSent] = useState(false); // Ajouté pour contrôler l'envoi de la requête
   const [meilleursJoueurs, setMeilleursJoueurs] = useState<Joueur[]>([]);
-  const [utilisateursNotifies, setUtilisateursNotifies] = useState([]);
+  const [utilisateursNotifies, setUtilisateursNotifies] = useState<Notification[]>([]);
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
 
@@ -138,16 +149,19 @@ const App = () => {
   const currentQuestion: Question = questions[currentQuestionIndex];
 
   const fetchUtilisateursNotifies = () => {
-    fetch('http://localhost:3000/likes-notifies')
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-          console.log("Données des likes récupérées")
-        }
-        throw new Error('Réseau ou erreur de réponse');
-      })
-      .then(data => setUtilisateursNotifies(data))
-      .catch(error => console.error('Erreur lors de la récupération des utilisateurs notifiés:', error));
+    Promise.all([
+      fetch('http://localhost:3000/likes-notifies').then(res => res.json()),
+      fetch('http://localhost:3000/socials-notifies').then(res => res.json()),
+      fetch('http://localhost:3000/gifts-notifies').then(res => res.json())
+    ]).then(([likesData, socialsData, cadeauxData]) => {
+      // Combinez toutes les notifications en une liste, en ajoutant un champ pour indiquer le type
+      const combinedData = [
+        ...likesData.map((item : Notification) => ({ ...item, type: 'like' } as Notification)),
+        ...socialsData.map((item : Notification) => ({ ...item, type: 'social' } as Notification)),
+        ...cadeauxData.map((item : Notification) => ({ ...item, type: 'gift' } as Notification))
+      ];
+      setUtilisateursNotifies(combinedData);
+    }).catch(error => console.error('Erreur lors de la récupération des notifications:', error));
   };
 
   useEffect(() => {
@@ -192,8 +206,7 @@ const App = () => {
       <div className="star star3">★</div>
       <div className="star star4">★</div>
       <div>
-        Merci, {(utilisateursNotifies[currentUserIndex] as any).nickname} pour les {(utilisateursNotifies[currentUserIndex] as any).likeCount} likes !
-      </div>
+      Merci, {utilisateursNotifies[currentUserIndex].nickname} pour {utilisateursNotifies[currentUserIndex].type === 'like' ? `les likes` : utilisateursNotifies[currentUserIndex].type === 'social' ? `l'action sociale` : `le cadeau ${utilisateursNotifies[currentUserIndex].giftId ? `ID: ${utilisateursNotifies[currentUserIndex].giftId}` : ''}`}      </div>
     </div>
   )}
       <div style={{ visibility: isCardVisible ? "visible" : "hidden" }} >
