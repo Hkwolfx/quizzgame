@@ -12,8 +12,90 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: inherit;
-  background-image: url('./Quizboost.jpg'); 
+  background-image: url("./Quizboost.jpg");
   background-blend-mode: multiply; /* Mélange la couleur de fond et l'image de texture */
+}
+
+.wrap {
+  max-width: 1400px;
+}
+.x-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1 1 auto;
+  margin-left: 18px;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: orange;
+  margin-right: 100px;
+  margin-bottom: 10px;
+  background-image: url("./newlike.png");
+  background-size: 60px 60px;
+  background-repeat: no-repeat;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.icon1 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: orange;
+  margin-right: 100px;
+  margin-bottom: 10px;
+  background-image: url("./newshare.png");
+  background-size: 60px 60px;
+  background-repeat: no-repeat;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.icon2 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: orange;
+  margin-right: 100px;
+  margin-bottom: 10px;
+  background-image: url("./newgift.png");
+  background-size: 60px 60px;
+  background-repeat: no-repeat;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.plusone {
+  color : white;
+  font-size: x-large;
+  text-shadow:
+        3px 3px 0 #000,   /* Contour noir large */
+        -1px -1px 0 #000, /* Contour noir en haut à gauche */
+        1px -1px 0 #000,  /* Contour noir en haut à droite */
+        -1px 1px 0 #000,  /* Contour noir en bas à gauche */
+        1px 1px 0 #000,   /* Contour noir en bas à droite */
+        0 0 8px #ffd700,  /* Lueur externe intense */
+        0 0 12px #ffcf40, /* Lueur externe moyenne */
+        0 0 20px #ffbf00, /* Lueur interne plus large */
+        0 0 30px #ffbf00, /* Lueur encore plus large */
+        0 0 40px #ffbf00, /* Lueur la plus large */
+        0 0 50px #ffbf00; /* Lueur extrêmement large */
 }
 
 .count-container {
@@ -21,7 +103,7 @@ body {
   margin-top: 20px;
 }
 
-li{
+li {
   list-style: none;
 }
 
@@ -34,7 +116,8 @@ li{
   left: 0;
 }
 
-.play-button, .pause-button {
+.play-button,
+.pause-button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
   margin: 5px;
   width: 50px;
@@ -50,22 +133,24 @@ li{
   transition: transform 0.3s ease;
 }
 
-.play-button:hover, .pause-button:hover {
+.play-button:hover,
+.pause-button:hover {
   transform: scale(1.1);
 }
 
 @keyframes bounce {
-  0%, 100% { 
-      transform: translateY(0) rotateX(0) rotateY(0);
+  0%,
+  100% {
+    transform: translateY(0) rotateX(0) rotateY(0);
   }
-  25% { 
-      transform: translateY(-100px) rotateX(180deg) rotateY(0);
+  25% {
+    transform: translateY(-100px) rotateX(180deg) rotateY(0);
   }
-  50% { 
-      transform: translateY(0) rotateX(180deg) rotateY(180deg);
+  50% {
+    transform: translateY(0) rotateX(180deg) rotateY(180deg);
   }
-  75% { 
-      transform: translateY(-100px) rotateX(0) rotateY(180deg);
+  75% {
+    transform: translateY(-100px) rotateX(0) rotateY(180deg);
   }
 }
 
@@ -128,20 +213,19 @@ li{
   100% { background-color: rgba(255, 0, 0, 0.5); }
 } */
 
-
 .blob {
-	background: rgb(0, 0, 0);
-	border-radius: 50%;
-	margin: 10px;
-	height: 20px;
-	width: 20px;
+  background: rgb(0, 0, 0);
+  border-radius: 50%;
+  margin: 10px;
+  height: 20px;
+  width: 20px;
   display: flex;
   justify-content: center;
   margin: 40px 40px;
 
-	box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-	transform: scale(1);
-	animation: pulse 2s infinite;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  transform: scale(1);
+  animation: pulse 2s infinite;
 }
 .thank-you-messages {
   position: relative; /* Permet de positionner les étoiles par rapport à ce conteneur */
@@ -153,10 +237,11 @@ li{
   margin-bottom: 5px;
   width: 300px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* X-offset, Y-offset, blur radius, and color */
-  -webkit-animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, 
-                     roll-in-left 0.6s ease-out both;
-  animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, 
-             roll-in-left 0.6s ease-out both;
+  -webkit-animation: puff-in-center 0.7s cubic-bezier(0.47, 0, 0.745, 0.715)
+      both,
+    roll-in-left 0.6s ease-out both;
+  animation: puff-in-center 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) both,
+    roll-in-left 0.6s ease-out both;
 }
 
 .thank-you-messages::before,
@@ -226,20 +311,20 @@ li{
 }
 
 @keyframes pulse {
-	0% {
-		transform: scale(1);
-		box-shadow: 0 0 0 0 rgb(255, 255, 255);
-	}
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(255, 255, 255);
+  }
 
-	70% {
-		transform: scale(4);
-		box-shadow: 0 0 0 10px rgb(255, 255, 255);
-	}
+  70% {
+    transform: scale(4);
+    box-shadow: 0 0 0 10px rgb(255, 255, 255);
+  }
 
-	100% {
-		transform: scale(0.95);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	}
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 
 /* ----------------------------------------------
@@ -254,31 +339,30 @@ li{
  * animation roll-in-left
  * ----------------------------------------
  */
- @-webkit-keyframes roll-in-left {
+@-webkit-keyframes roll-in-left {
   0% {
     -webkit-transform: translateX(-800px) rotate(-540deg);
-            transform: translateX(-800px) rotate(-540deg);
+    transform: translateX(-800px) rotate(-540deg);
     opacity: 0;
   }
   100% {
     -webkit-transform: translateX(0) rotate(0deg);
-            transform: translateX(0) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
     opacity: 1;
   }
 }
 @keyframes roll-in-left {
   0% {
     -webkit-transform: translateX(-800px) rotate(-540deg);
-            transform: translateX(-800px) rotate(-540deg);
+    transform: translateX(-800px) rotate(-540deg);
     opacity: 0;
   }
   100% {
     -webkit-transform: translateX(0) rotate(0deg);
-            transform: translateX(0) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
     opacity: 1;
   }
 }
-
 
 /* ----------------------------------------------
  * Generated by Animista on 2024-3-2 13:6:23
@@ -292,39 +376,38 @@ li{
  * animation puff-in-center
  * ----------------------------------------
  */
- @-webkit-keyframes puff-in-center {
+@-webkit-keyframes puff-in-center {
   0% {
     -webkit-transform: scale(2);
-            transform: scale(2);
+    transform: scale(2);
     -webkit-filter: blur(4px);
-            filter: blur(4px);
+    filter: blur(4px);
     opacity: 0;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
 }
 @keyframes puff-in-center {
   0% {
     -webkit-transform: scale(2);
-            transform: scale(2);
+    transform: scale(2);
     -webkit-filter: blur(4px);
-            filter: blur(4px);
+    filter: blur(4px);
     opacity: 0;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
 }
-
 
 @keyframes move-up {
   0% {
