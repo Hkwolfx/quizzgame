@@ -37,13 +37,12 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: orange;
   margin-right: 100px;
   margin-bottom: 10px;
-  background-image: url("./newlike.png");
+  background-image: url("./PikPngLike.png");
   background-size: 60px 60px;
   background-repeat: no-repeat;
-
+  background-size: contain;
   &:last-child {
     margin-right: 0;
   }
@@ -53,10 +52,10 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: orange;
+  background-size: contain;
   margin-right: 100px;
   margin-bottom: 10px;
-  background-image: url("./newshare.png");
+  background-image: url("./visualhunter.png");
   background-size: 60px 60px;
   background-repeat: no-repeat;
 
@@ -69,10 +68,11 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: orange;
+  
   margin-right: 100px;
+  background-size: contain;
   margin-bottom: 10px;
-  background-image: url("./newgift.png");
+  background-image: url("./giftwrap.png");
   background-size: 60px 60px;
   background-repeat: no-repeat;
 

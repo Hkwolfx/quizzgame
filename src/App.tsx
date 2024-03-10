@@ -42,6 +42,8 @@ const App = () => {
   >([]);
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(600); // 600 secondes = 10 minutes
+const [sessionStatus, setSessionStatus] = useState('inactive');
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
@@ -223,6 +225,56 @@ const App = () => {
     }
   }, [currentUserIndex, utilisateursNotifies]);
 
+  useEffect(() => {
+    const fetchSessionInfo = () => {
+      fetch("http://localhost:3000/session-info")
+        .then((res) => res.json())
+        .then((sessionData) => {
+          console.log('Session data:', sessionData);
+          setSessionStatus(sessionData.isActive ? 'active' : 'inactive'); // Correction ici
+          if (sessionData.isActive) { // Et ici
+            // Calculez le temps restant en secondes
+            const endTime = new Date(sessionData.endTime).getTime();
+            const now = new Date().getTime();
+            const newTimeLeft = Math.round((endTime - now) / 1000);
+            setTimeLeft(newTimeLeft > 0 ? newTimeLeft : 0);
+          } else {
+            // Si la session n'est pas active, réinitialisez le timer
+            setTimeLeft(600); // Réinitialiser à 10 minutes
+          }
+        })
+        .catch((error) => {
+          console.error("Erreur lors de la récupération des infos de session:", error);
+        });
+    };
+  
+    // Appeler immédiatement la fonction lors du chargement du composant
+    fetchSessionInfo();
+  
+    // Configurer l'intervalle pour le rappel toutes les 2 minutes
+    const interval = setInterval(fetchSessionInfo, 120000); // 120000 ms = 2 minutes
+  
+    // Nettoyer l'intervalle quand le composant se démonte
+    return () => clearInterval(interval);
+  }, []);
+  
+  useEffect(() => {
+    let interval: number | null = null; // Declare 'interval' as 'number | null'
+    if (sessionStatus === 'active' && timeLeft > 0) {
+      interval = window.setInterval(() => { // Use 'window.setInterval' if in browser
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
+      }, 1000);
+    } else if (sessionStatus !== 'active') {
+      setTimeLeft(0); // Or your logic for when the session is not active
+    }
+    return () => {
+      if (interval !== null) { // Check if 'interval' is not null
+        clearInterval(interval); // TypeScript knows 'interval' is a number here
+      }
+    };
+  }, [sessionStatus, timeLeft]);
+  
+
   return (
     <div className="App">
       {isPlaying ? (
@@ -234,6 +286,9 @@ const App = () => {
           <FaPlay size={30} />
         </button>
       )}
+      <div className="timer">
+  Temps restant : {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}
+</div>
       {showThankYou && currentUserIndex < utilisateursNotifies.length && (
         <div className="thank-you-messages">
           <div className="star star1">★</div>
