@@ -257,7 +257,7 @@ const [sessionStatus, setSessionStatus] = useState('inactive');
     // Nettoyer l'intervalle quand le composant se démonte
     return () => clearInterval(interval);
   }, []);
-  
+
   useEffect(() => {
     let interval: number | null = null; // Declare 'interval' as 'number | null'
     if (sessionStatus === 'active' && timeLeft > 0) {
