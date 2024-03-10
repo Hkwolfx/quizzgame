@@ -225,6 +225,8 @@ const [sessionStatus, setSessionStatus] = useState('inactive');
     }
   }, [currentUserIndex, utilisateursNotifies]);
 
+  // Logique de session et de minuterie
+
   useEffect(() => {
     const fetchSessionInfo = () => {
       fetch("http://localhost:3000/session-info")
@@ -247,7 +249,10 @@ const [sessionStatus, setSessionStatus] = useState('inactive');
           console.error("Erreur lors de la récupération des infos de session:", error);
         });
     };
-  
+    
+    setTimeLeft(600); // Initialiser à 10 minutes lors du chargement initial
+    
+
     // Appeler immédiatement la fonction lors du chargement du composant
     fetchSessionInfo();
   
@@ -259,17 +264,17 @@ const [sessionStatus, setSessionStatus] = useState('inactive');
   }, []);
 
   useEffect(() => {
-    let interval: number | null = null; // Declare 'interval' as 'number | null'
+    let interval: number | null = null; // TypeScript sait que 'interval' est un nombre ou null ici
     if (sessionStatus === 'active' && timeLeft > 0) {
-      interval = window.setInterval(() => { // Use 'window.setInterval' if in browser
+      interval = window.setInterval(() => { // TypeScript sait que 'interval' est un nombre ici
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
       }, 1000);
     } else if (sessionStatus !== 'active') {
-      setTimeLeft(0); // Or your logic for when the session is not active
+      setTimeLeft(0); // Réinitialiser le temps restant à 0
     }
     return () => {
-      if (interval !== null) { // Check if 'interval' is not null
-        clearInterval(interval); // TypeScript knows 'interval' is a number here
+      if (interval !== null) { // TypeScript sait que 'interval' est un nombre ou null ici
+        clearInterval(interval); // TypeScript sait que 'interval' est un nombre ici
       }
     };
   }, [sessionStatus, timeLeft]);
