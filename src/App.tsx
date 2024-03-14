@@ -10,11 +10,12 @@ import Ranking from "./components/Ranking";
 
 // typages
 
-interface Joueur {
+export interface Joueur {
   userId: string;
   uniqueId: string;
   score: number;
   profilePictureUrl?: string;
+  nickname: string;
 }
 
 interface Notification {

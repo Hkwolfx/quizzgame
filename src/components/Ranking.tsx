@@ -1,9 +1,18 @@
 import React from "react";
 import { FaShare } from "react-icons/fa";
 import "./Ranking.css";
+import { Joueur } from "../App";
 
 
-const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
+// Utilisation de l'interface pour typer les props du composant
+
+
+interface RankingProps {
+  meilleursJoueurs: Joueur[];
+}
+
+
+const Ranking: React.FC<RankingProps> = ({ meilleursJoueurs }) => {
   return (
     <main
       style={{
@@ -36,7 +45,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
             textTransform: "uppercase",
           }}
         >
-          Ranking
+          Classement
         </h1>
         <button
           className="share"
@@ -100,7 +109,7 @@ const Ranking = ({ meilleursJoueurs }: { meilleursJoueurs: any[] }) => {
               </td>
               <td>
               <img
-                  src={joueur.profilePictureUrl || "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/edd12aab059d878ba5ca47a380016436~c5_100x100.webp?lk3s=a5d48078&x-expires=1708516800&x-signature=pKfnUMAfKukSqhUCa7PAgvIPdIg%3D" }
+                  src={joueur.profilePictureUrl || "https://i.pravatar.cc/300" }
                   alt="Profile"
                   style={{ height: "2rem", marginRight: "0.5rem", borderRadius: "50%" }} // Ajustez selon votre design
                 />
