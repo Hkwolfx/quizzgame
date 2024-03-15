@@ -66,7 +66,7 @@ const [gracePeriod, setGracePeriod] = useState(false);
         setShowResponse(true);
         setTimeout(() => {
           setShowResponse(false);
-          setCurrentQuestionIndex((prevIndex) => prevIndex < questions.length - 1 ? prevIndex + 1 : 0);
+          setCurrentQuestionIndex(getRandomQuestionIndex()); // Sélection aléatoire de la prochaine question
           setSecondsLeft(30); // Réinitialisation pour la prochaine question
           setGracePeriod(false); // Réinitialisation de la période de grâce pour la prochaine question
           setStartSent(false); // Réinitialisation de l'envoi de la requête pour la prochaine question
