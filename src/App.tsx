@@ -28,7 +28,8 @@ interface Notification {
 }
 
 const App = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const getRandomQuestionIndex = () => Math.floor(Math.random() * questions.length);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(getRandomQuestionIndex);
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [showResponse, setShowResponse] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -45,28 +46,39 @@ const App = () => {
   const [showThankYou, setShowThankYou] = useState(false);
   const [timeLeft, setTimeLeft] = useState(600); // 600 secondes = 10 minutes
 const [sessionStatus, setSessionStatus] = useState('inactive');
+const [gracePeriod, setGracePeriod] = useState(false);
 
   const responseTime = 5000; // 5 secondes pour afficher la réponse
 
-  // Timer pour le compte à rebours
+  const gracePeriodDuration = 3; // 3 secondes de période de grâce
+
   useEffect(() => {
+    let interval: number | null = null; // Déclaration avec un type explicite pour éviter l'erreur TS7034
     if (secondsLeft > 0 && isPlaying && !isPaused && !showResponse) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setSecondsLeft(secondsLeft - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    } else if (secondsLeft === 0 && !showResponse) {
-      setShowResponse(true);
+      }, 1000) as unknown as number; // TypeScript sait que 'interval' est un nombre ici
+    } else if (secondsLeft === 0 && !showResponse && !gracePeriod) {
+      // Activation de la période de grâce
+      setGracePeriod(true);
       setTimeout(() => {
-        setShowResponse(false);
-        setCurrentQuestionIndex((prevIndex) =>
-          prevIndex < questions.length - 1 ? prevIndex + 1 : 0
-        );
-        setSecondsLeft(30); // Réinitialisation pour la prochaine question
-        setStartSent(false); // Réinitialisation de l'envoi de la requête pour la prochaine question
-      }, responseTime);
+        // Après la période de grâce, afficher les réponses et réinitialiser pour la question suivante
+        setShowResponse(true);
+        setTimeout(() => {
+          setShowResponse(false);
+          setCurrentQuestionIndex((prevIndex) => prevIndex < questions.length - 1 ? prevIndex + 1 : 0);
+          setSecondsLeft(30); // Réinitialisation pour la prochaine question
+          setGracePeriod(false); // Réinitialisation de la période de grâce pour la prochaine question
+          setStartSent(false); // Réinitialisation de l'envoi de la requête pour la prochaine question
+        }, responseTime);
+      }, gracePeriodDuration * 1000); // Attendre la période de grâce avant de continuer
     }
-  }, [secondsLeft, isPlaying, isPaused, showResponse]);
+    return () => {
+      if (interval !== null) { // Vérification avant d'effacer l'intervalle pour s'adapter à TypeScript
+        clearInterval(interval);
+      }
+    };
+}, [secondsLeft, isPlaying, isPaused, showResponse, gracePeriod]);
 
   useEffect(() => {
     if (secondsLeft === 30 && !startSent && !showResponse) {
