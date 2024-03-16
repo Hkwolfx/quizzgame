@@ -1,53 +1,73 @@
 .progress-bar-container {
-    width: 100%;
-    margin-top: 80px;
-    border-radius: 5px;
-    position: relative; /* Positionnement relatif pour que les enfants soient positionnés par rapport à ce conteneur */
-    overflow: hidden; /* Assure que la barre interne reste dans les coins arrondis */
-    margin-top: -20px;
-  }
-  
-  .progress-bar {
-    height: 20px;
-    animation: colorChange 30s infinite;
-    transition: width 1s ease-in-out; /* Transition douce pour le changement de largeur */
-  }
-  
-  .progress-bar-timer {
-    width: 35px;
-    z-index:1;
-    right: 0;
-    margin-left: 49%;
-    font-weight: bold;
-    bottom: 100%; /* Positionner au-dessus de la barre */
-    color: black; /* Couleur du texte */
-    background-color: white; /* Couleur de fond pour contraste */
-    padding: 5px;
-    border: 3px solid black; /* Bordure pour visibilité */
-    border-radius: 50%;
-  }
+  width: 100%;
+  margin-top: 80px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  margin-top: -20px;
+}
 
-  /* App.css */
+.progress-bar {
+  height: 20px;
+}
+
+.progress-bar-timer {
+  width: 35px;
+  z-index: 1;
+  right: 0;
+  margin-left: 49%;
+  font-weight: bold;
+  bottom: 100%;
+  color: black;
+  background-color: white;
+  padding: 5px;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+/* App.css */
+
 .App {
   position: relative;
-  border: 10px solid transparent; /* Ajustez la taille de la bordure selon vos besoins */
-  border-radius: 5px; /* Pour les coins arrondis */
-  background-clip: padding-box; /* Empêche le fond de déborder dans la bordure */
-  animation: borderAnimation 30s infinite; /* Utilisez la même animation que celle de la barre de progression pour la synchronisation */
-  overflow: hidden; /* Garde les enfants à l'intérieur du cadre */
+  border: 10px solid transparent;
+  border-radius: 5px;
+  background-clip: padding-box;
+  animation: borderAnimation 30s infinite;
+  overflow: hidden;
+}
+
+.App::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: orange;
+  border-radius: 50%;
+  animation: move 39s infinite;
+  box-shadow: 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 30px #ff8c00, 0 0 40px #ff8c00;
 }
 
 @keyframes borderAnimation {
-  0% { border-color: green; }
-  50% { border-color: yellow; }
-  100% { border-color: red; }
+  0% {
+    border-color: green;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 1); /* Box-shadow plus marqué */
+  }
+  50% {
+    border-color: yellow;
+    box-shadow: 0 0 30px rgba(255, 255, 0, 1); /* Box-shadow plus marqué */
+  }
+  100% {
+    border-color: red;
+    box-shadow: 0 0 100px rgba(255, 0, 0, 1); /* Box-shadow initial */
+  }
 }
 
 
-  @keyframes colorChange {
-    0% { background-color: green; }
-    50% { background-color: yellow; }
-    100% { background-color: red; }
+@keyframes move {
+  0% { top: -1%; left: -1%; }
+  20% { top: -1%; left: 99%; }
+  40% { top: 99%; left: 99%; }
+  60% { top: 99%; left: -2%; }
+  80%, 100% { top: 0%; left: -2%; }
 }
-
 

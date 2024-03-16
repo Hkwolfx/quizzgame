@@ -13,8 +13,13 @@
 
 }
 
-body {
 
+/* * {
+  overflow : hidden
+} */
+
+body {
+  background-color: black !important;
 }
 
 .wrap {

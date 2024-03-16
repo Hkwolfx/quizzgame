@@ -1,6 +1,8 @@
 import React from 'react';
 import './ProgressBar.css'; // Assurez-vous que le fichier CSS correspondant est ajouté
 
+
+
 interface ProgressBarProps {
   value: number; // La valeur actuelle de la jauge
   maxValue: number; // La valeur maximale de la jauge
