@@ -5,11 +5,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
     margin: auto; /* Marge autour de la carte */
     padding: 20px;
-    width: 800px;
+    width: 681px;
     height: 390px;
-    min-height: 390px;
-    min-width: 800px;
-    max-width: 800px; /* Largeur maximale de la carte */
+  
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition pour les effets au survol */
 }
 

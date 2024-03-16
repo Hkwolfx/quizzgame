@@ -348,7 +348,7 @@ const [gracePeriod, setGracePeriod] = useState(false);
         </div>
       </div>
       {!showResponse && <ProgressBar value={secondsLeft} maxValue={10} />}
-      <TestResults />
+      {/* <TestResults /> */}
     </div>
   );
 };

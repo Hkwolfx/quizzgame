@@ -4,7 +4,7 @@
     border-radius: 5px;
     position: relative; /* Positionnement relatif pour que les enfants soient positionnés par rapport à ce conteneur */
     overflow: hidden; /* Assure que la barre interne reste dans les coins arrondis */
-    margin-top: 5px;
+    margin-top: -20px;
   }
   
   .progress-bar {
@@ -27,8 +27,27 @@
     border-radius: 50%;
   }
 
+  /* App.css */
+.App {
+  position: relative;
+  border: 10px solid transparent; /* Ajustez la taille de la bordure selon vos besoins */
+  border-radius: 5px; /* Pour les coins arrondis */
+  background-clip: padding-box; /* Empêche le fond de déborder dans la bordure */
+  animation: borderAnimation 30s infinite; /* Utilisez la même animation que celle de la barre de progression pour la synchronisation */
+  overflow: hidden; /* Garde les enfants à l'intérieur du cadre */
+}
+
+@keyframes borderAnimation {
+  0% { border-color: green; }
+  50% { border-color: yellow; }
+  100% { border-color: red; }
+}
+
+
   @keyframes colorChange {
     0% { background-color: green; }
     50% { background-color: yellow; }
     100% { background-color: red; }
 }
+
+

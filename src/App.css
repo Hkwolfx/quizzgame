@@ -6,14 +6,15 @@
   justify-content: center; /* Centre les éléments verticalement */
   min-height: 100vh; /* Hauteur minimale pour prendre toute la hauteur de la vue */
   margin: 0;
+  background-image: url("./Quizboost.jpg");
+  background-size: cover;
+  background-position: center;
+ 
+
 }
 
 body {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: inherit;
-  background-image: url("./Quizboost.jpg");
-  background-blend-mode: multiply; /* Mélange la couleur de fond et l'image de texture */
+
 }
 
 .wrap {
