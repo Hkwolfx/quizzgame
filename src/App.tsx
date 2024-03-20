@@ -274,7 +274,7 @@ const [gracePeriod, setGracePeriod] = useState(false);
   
     // Nettoyer l'intervalle quand le composant se démonte
     return () => clearInterval(interval);
-  }, []);
+  }, [startSent, currentQuestionIndex, secondsLeft]);
 
   useEffect(() => {
     let interval: number | null = null; // TypeScript sait que 'interval' est un nombre ou null ici
@@ -290,7 +290,41 @@ const [gracePeriod, setGracePeriod] = useState(false);
         clearInterval(interval); // TypeScript sait que 'interval' est un nombre ici
       }
     };
-  }, [sessionStatus, timeLeft]);
+  }, [sessionStatus, timeLeft, startSent, secondsLeft]);
+
+  // Check de fin de partie
+
+  let intervalID = setInterval(checkServerStatus, 60000); // Exécuter toutes les 60 secondes
+
+  function checkServerStatus() {
+    fetch('/session-end')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Le serveur ne répond pas.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.message === "Le serveur va se fermer.") {
+          clearInterval(intervalID); // Arrête l'intervalle
+          // Remplacez le contenu de la page actuelle
+          document.body.innerHTML = "<h2>Merci d'avoir participé, à demain !</h2>";
+          document.body.style.textAlign = 'center';
+          document.body.style.color = 'white'; // Définit la couleur du texte en noir
+          // Empêche la navigation ou les actions supplémentaires
+          document.body.onclick = () => false;
+        }
+      })
+      .catch(error => {
+        console.error('Error checking server status:', error);
+        clearInterval(intervalID); // Arrête l'intervalle si le serveur ne répond pas
+        // Si le serveur est down, affichez le message
+        document.body.innerHTML = "<h2>Merci d'avoir participé, à demain !</h2>";
+        document.body.style.textAlign = 'center';
+        document.body.style.color = 'white'; // Définit la couleur du texte en noir        
+      });
+}
+
   
 
   return (

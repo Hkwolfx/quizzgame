@@ -62,6 +62,14 @@
     text-transform: uppercase;
     cursor: default;
   }
+
+  h2 {
+    font-family: "Rubik", sans-serif;
+    font-size: 1.7rem;
+    color: white;
+    text-transform: uppercase;
+    cursor: default;
+  }
   
   #leaderboard {
     width: 100%;
