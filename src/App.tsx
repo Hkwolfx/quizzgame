@@ -7,6 +7,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import "./App.css";
 // import { initializeDragAndDrop } from "./_dragnDrop";
 import Ranking from "./components/Ranking";
+import SessionTracker from "./components/SessionTracker";
 
 // typages
 
@@ -385,6 +386,7 @@ const [gracePeriod, setGracePeriod] = useState(false);
       </div>
       {!showResponse && <ProgressBar value={secondsLeft} maxValue={10} />}
       {/* <TestResults /> */}
+      <SessionTracker  sessionStatus={sessionStatus} />
     </div>
   );
 };
